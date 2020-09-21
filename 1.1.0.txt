@@ -1,0 +1,1772 @@
+settings
+{
+    main
+    {
+        Description: "Project: Phantom. Survive the nightmare until time runs out! Choose from multiple and unique survivors to help both yourself and your teammates. Version 1.1.0. Created by Block#12425. Discord server: https://discord.gg/CSKSVDH"
+    }
+    lobby
+    {
+        Allow Players Who Are In Queue: Yes
+        Max Team 1 Players: 1
+        Max Team 2 Players: 9
+        Return To Lobby: Never
+        Team Balancing: After A Game
+    }
+    modes
+    {
+        Team Deathmatch
+        {
+            enabled maps
+            {
+                Ecopoint: Antarctica
+                Eichenwalde Halloween
+                Necropolis
+            }
+        }
+        General
+        {
+            Hero Limit: 2 Per Team
+            Skins: Off
+            Spawn Health Packs: Disabled
+        }
+    }
+    heroes
+    {
+        Team 1
+        {
+            Reaper
+            {
+                Movement Speed: 110%
+                Damage Dealt: 500%
+                Damage Received: 10%
+                Primary Fire: Off
+                Shadow Step: Off
+                Ultimate Ability Death Blossom: Off
+            }
+            enabled heroes
+            {
+                Reaper
+            }
+        }
+        Team 2
+        {
+            Quick Melee: Off
+            Brigitte
+            {
+                Barrier Shield Cooldown Time: 20%
+                Barrier Shield Recharge Rate: 150%
+                Healing Dealt: 10%
+                Primary Fire: Off
+                Repair Pack: Off
+                Ultimate Ability Rally: Off
+                Whip Shot Knockback Scalar: 150%
+            }
+            Hanzo
+            {
+                Lunge: Off
+                Primary Fire: Off
+                Storm Arrows: Off
+                Ultimate Ability Dragonstrike: Off
+            }
+            Moira
+            {
+                Biotic Orb: Off
+                Primary Fire: Off
+                Secondary Fire: Off
+                Ultimate Ability Coalescence: Off
+            }
+            Reaper
+            {
+                Damage Dealt: 350%
+                Damage Received: 10%
+            }
+            Symmetra
+            {
+                Primary Fire: Off
+                Secondary Fire: Off
+                Sentry Turret Cooldown Time: 150%
+                Ultimate Ability Photon Barrier: Off
+            }
+            Tracer
+            {
+                Blink Cooldown Time: 400%
+                Primary Fire: Off
+                Ultimate Ability Pulse Bomb: Off
+            }
+            Winston
+            {
+                Barrier Projector: Off
+                Primary Fire: Off
+                Ultimate Ability Primal Rage: Off
+            }
+            Wrecking Ball
+            {
+                Grappling Claw: Off
+                Infinite Ultimate Duration: On
+                Minefield Knockback Scalar: 200%
+                Piledriver: Off
+                Primary Fire: Off
+                Projectile Gravity: 150%
+                Projectile Speed: 150%
+                Roll: Off
+                Spawn With Ultimate Ready: On
+                Ultimate Generation - Combat Minefield: 0%
+                Ultimate Generation - Passive Minefield: 500%
+                Ultimate Generation Minefield: 100%
+            }
+            enabled heroes
+            {
+                Brigitte
+                Hanzo
+                Moira
+                Symmetra
+                Tracer
+                Winston
+                Wrecking Ball
+            }
+        }
+    }
+}
+variables {
+    global:
+        0: stringVersion
+        1: stringCreator
+        2: stringDiscord
+        3: stringDiscordLink
+        4: stringProject
+        5: stringProjectLink
+        6: stringCreatorVersion
+        7: stringCodeLink
+        8: stringCode
+        9: stringSec
+        10: stringHP
+        11: stringMoiraTitle
+        12: stringMoiraAbility1
+        13: stringMoiraAbility2
+        14: stringMoiraPassive
+        15: stringMoiraHeal
+        16: stringMoiraSacrifice
+        17: stringHideInfo
+        18: stringShowInfo
+        19: stringHanzoTitle
+        20: stringHanzoAbility1
+        21: stringHanzoAbility2
+        22: stringHanzoPassive
+        23: stringBrigTitle
+        24: stringBrigAbility1
+        25: stringBrigAbility2
+        26: stringWBTitle
+        27: stringWBAbility1
+        28: stringWBAbility2
+        29: stringCharges
+        30: stringSymTitle
+        31: stringSymAbility1
+        32: stringSymAbility2
+        33: stringTracerTitle
+        34: stringTracerAbility1
+        35: stringTracerAbility2
+        36: stringReaperTitle
+        37: stringReaperAbility1
+        38: stringReaperAbility2
+        39: stringReaperAbility3
+        40: stringReaperAbility4
+        41: stringReaperAbility5
+        42: stringTracerPassive
+        43: stringWinstonTitle
+        44: stringWinstonAbility1
+        45: stringWinstonAbility2
+        46: stringTracerTeleportMessage
+        47: stringTeamKill
+        48: stringWinstonGrab
+        49: stringTimeRemaining
+        50: stringObjectiveSurvivors
+        51: stringObjectiveReaper
+        52: stringReaperTeleport
+        53: stringReaperTeleportGhost
+        54: stringLateJoin
+        55: stringChase
+        56: stringTip
+        57: stringReaperTeleportSpawn
+        58: stringArrayFog
+        59: stringGhost
+        60: stringWinstonRide
+        61: stringOneHit
+        62: stringWaitingGame
+        63: stringGH
+        64: stringGHDiscord
+        65: stringGHDiscordLink
+        66: hudIDs
+        67: effectIDs
+        68: inWorldTextIDs
+        69: i
+        70: j
+        71: fogDistance
+        72: gracePeriod
+        73: matchTimeMin
+        74: matchTimeSec
+        75: debugMode
+        76: tipsEnabled
+    player:
+        0: survivorSpecificVariable3
+        1: survivorSpecificVariable4
+        2: winstonGrab
+        3: lateJoin
+        4: survivorSpecificVariable
+        5: throwingPlayer
+        6: survivorSpecificVariable2
+        7: wasOnWall
+        8: hasSpawned
+        9: hideInfo
+        10: survivorSpecificVariable5
+        11: prevHero
+        12: k
+}
+subroutines {
+    0: english
+    1: commonSub
+    2: playerReset
+    3: debugMode
+    4: nameTagCreate
+}
+rule ("Constant Strings") {
+    event {
+        Ongoing - Global;
+    }
+    actions {
+        Set Global Variable(stringCodeLink, Custom String("8MM16", Null, Null, Null));
+        Set Global Variable(stringProjectLink, Custom String("workshop.codes/8MM16", Null, Null, Null));
+        Set Global Variable(stringDiscordLink, Custom String("discord.gg/CSKSVDH", Null, Null, Null));
+        Set Global Variable(stringVersion, Custom String("1.1.0", Null, Null, Null));
+        Set Global Variable(stringCreator, Custom String("Block#12425", Null, Null, Null));
+        Set Global Variable(stringGHDiscordLink, Custom String("grandeurhammers.com", Null, Null, Null));
+    }
+}
+
+rule ("Determine Language (English)") {
+    event {
+        Ongoing - Global;
+    }
+    actions {
+        "By default all strings are set to English. If it is a different language then the strings will be set to that, with any untranslated strings remaining in English.
+\nAll strings (that will be translated if they are) for the game."
+        Set Global Variable(stringProject, Custom String("Project: {0}", Global.stringProjectLink, Null, Null));
+        Set Global Variable(stringDiscord, Custom String("Discord: {0} (All caps)", Global.stringDiscordLink, Null, Null));
+        Set Global Variable(stringCreatorVersion, Custom String("Created by: {0}. Version: {1}", Global.stringCreator, Global.stringVersion, Null));
+        Set Global Variable(stringCode, Custom String("Code: {0}", Global.stringCodeLink, Null, Null));
+        Set Global Variable(stringSec, Custom String("CD", Null, Null, Null));
+        Set Global Variable(stringHP, Custom String("HP", Null, Null, Null));
+        Set Global Variable(stringMoiraTitle, Custom String("Moira, the phasing support.", Null, Null, Null));
+        Set Global Variable(stringMoiraAbility1, Custom String("Fade out and go through walls to escape.", Null, Null, Null));
+        Set Global Variable(stringMoiraAbility2, Custom String("Heal an injured teammate for 1 HP. Does not work on Tracer.", Null, Null, Null));
+        Set Global Variable(stringHideInfo, Custom String("Hide Info.", Null, Null, Null));
+        Set Global Variable(stringShowInfo, Custom String("Show info", Null, Null, Null));
+        Set Global Variable(stringHanzoTitle, Custom String("Hanzo, the recon expert.", Null, Null, Null));
+        Set Global Variable(stringHanzoAbility1, Custom String("Equip a sonic dart that can reveal the Phantoms in the area.", Null, Null, Null));
+        Set Global Variable(stringHanzoAbility2, Custom String("Climb up walls.", Null, Null, Null));
+        Set Global Variable(stringHanzoPassive, Custom String("Passive: Can see the Phantoms' outlines through the fog.", Null, Null, Null));
+        Set Global Variable(stringBrigTitle, Custom String("Brigitte, the frontline resistance.", Null, Null, Null));
+        Set Global Variable(stringBrigAbility1, Custom String("Use flail to throw the Phantom back.", Null, Null, Null));
+        Set Global Variable(stringBrigAbility2, Custom String("Bash and stun with the shield! Requires primary fire to use.\nDoes not block damage.", Null, Null, Null));
+        Set Global Variable(stringWBTitle, Custom String("Wrecking Ball, the area denier", Null, Null, Null));
+        Set Global Variable(stringWBAbility1, Custom String("Create a force field that repels the Phantom,\neven in when he is in Wraith form.", Null, Null, Null));
+        Set Global Variable(stringWBAbility2, Custom String("Place a mine field that lasts infinitely (and can be destroyed).\n The Phantom will be stunned and knocked back if he hits one.", Null, Null, Null));
+        Set Global Variable(stringCharges, Custom String("Charges", Null, Null, Null));
+        Set Global Variable(stringTracerTitle, Custom String("Tracer, the quick-save speedster.", Null, Null, Null));
+        Set Global Variable(stringTracerAbility1, Custom String("Cover a chunk of distance in your current velocity instantly.", Null, Null, Null));
+        Set Global Variable(stringTracerAbility2, Custom String("Rewind to your position 3 seconds ago. Any teammates within\nthe ring when used will also be warped to your position.", Null, Null, Null));
+        Set Global Variable(stringReaperTitle, Custom String("Reaper, the monstrous spirit.", Null, Null, Null));
+        Set Global Variable(stringReaperAbility1, Custom String("Go into wraith form to go faster and go through walls.", Null, Null, Null));
+        Set Global Variable(stringReaperAbility2, Custom String("Enter teleport mode, able to fly and spawn back (you or your ghost) anywhere.", Null, Null, Null));
+        Set Global Variable(stringReaperAbility3, Custom String("Spawn a ghost, that appears just like you and roams the map.", Null, Null, Null));
+        Set Global Variable(stringReaperAbility4, Custom String("Swap positions with your ghost, perfectly in the same direction as each other.", Null, Null, Null));
+        Set Global Variable(stringReaperAbility5, Custom String("Punch survivors close enough to deal damage. Targets are usually\ntwo hits, unless buffed by Moira.", Null, Null, Null));
+        Set Global Variable(stringSymTitle, Custom String("Symmetra, the team escort.", Null, Null, Null));
+        Set Global Variable(stringSymAbility1, Custom String("Place a turret that slows down the Phantom. Can be destroyed. Max 3.", Null, Null, Null));
+        Set Global Variable(stringSymAbility2, Custom String("Create a teleporter for teammates to use. Use same button to destroy.\nWhen destroyed, restores charges of turrets.", Null, Null, Null));
+        Set Global Variable(stringTracerPassive, Custom String("Passive: Fragile. (1 hit only)", Null, Null, Null));
+        Set Global Variable(stringWinstonTitle, Custom String("Winston, the relocating ape.", Null, Null, Null));
+        Set Global Variable(stringWinstonAbility1, Custom String("Leap a far distance, along with anyone else you are carrying.", Null, Null, Null));
+        Set Global Variable(stringWinstonAbility2, Custom String("When holding no one, pick up a teammate within range (the ring).\nWhen holding someone, throw them in your current facing d{0}", Custom String("irection.", Null, Null, Null), Null, Null));
+        Set Global Variable(stringTracerTeleportMessage, Custom String("Teleported you back to safety my love!", Null, Null, Null));
+        Set Global Variable(stringMoiraHeal, Custom String("I have healed you.", Null, Null, Null));
+        Set Global Variable(stringMoiraSacrifice, Custom String("I have sacrificed my life for you all! Do not fail me.", Null, Null, Null));
+        Set Global Variable(stringTeamKill, Custom String("Nice job, you killed a teammate. Now you're dead.", Null, Null, Null));
+        Set Global Variable(stringWinstonGrab, Custom String("I have picked you up! I can throw you far distances for your safety!", Null, Null, Null));
+        Set Global Variable(stringTimeRemaining, Custom String("Time Remaining", Null, Null, Null));
+        Set Global Variable(stringObjectiveSurvivors, Custom String("Survive the night until time runs out!", Null, Null, Null));
+        Set Global Variable(stringObjectiveReaper, Custom String("Kill all the mortals before time runs out!", Null, Null, Null));
+        Set Global Variable(stringReaperTeleport, Custom String("Finish Teleporting", Null, Null, Null));
+        Set Global Variable(stringReaperTeleportGhost, Custom String("Spawn a ghost", Null, Null, Null));
+        Set Global Variable(stringLateJoin, Custom String("Joined mid-match. Please wait until next match!", Null, Null, Null));
+        Set Global Variable(stringTip, Custom String("Tip: Only one REAL Phantom exists.", Null, Null, Null));
+        Set Global Variable(stringReaperTeleportSpawn, Custom String("You think you can hide...", Null, Null, Null));
+        Set Global Variable(stringArrayFog, Array(Custom String("A ghostly fog settles in...", Null, Null, Null), Custom String("A snow storm forms...", Null, Null, Null), Custom String("A dust storm rolls in...", Null, Null, Null)));
+        Set Global Variable(stringWinstonRide, Custom String("Hop off of Winston", Null, Null, Null));
+        Set Global Variable(stringGhost, Custom String("Ghost", Null, Null, Null));
+        Set Global Variable(stringChase, Custom String("Chasing survivor...", Null, Null, Null));
+        Set Global Variable(stringOneHit, Custom String("Only one hit left!", Null, Null, Null));
+        Set Global Variable(stringWaitingGame, Custom String("Please have the host start the game", Null, Null, Null));
+        Set Global Variable(stringMoiraPassive, Custom String("Passive: You can see teammates in the fog & their health status.", Null, Null, Null));
+        Set Global Variable(stringGH, Custom String("{0} Certified by Grandeur Hammers", Ability Icon String(Hero(Torbjörn), Button(Ability 2)), Null, Null));
+        Set Global Variable(stringGHDiscord, Custom String("{0}", Global.stringGHDiscordLink, Null, Null));
+    }
+}
+
+rule ("Player Workshop Setting Variables") {
+    event {
+        Ongoing - Global;
+    }
+    actions {
+        Set Global Variable(fogDistance, Workshop Setting Integer(Custom String("General", Null, Null, Null), Custom String("Fog Distance", Null, Null, Null), 18, 5, 30));
+    }
+}
+
+rule ("Team 2 Game Start Setup") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        All;
+    }
+    conditions {
+        Has Spawned(Event Player) == True;
+        Is Alive(Event Player) == True;
+    }
+    actions {
+        Wait(0.5, Abort When False);
+        "Unique fog messages for each map."
+        If(Compare(Current Map, ==, Map(Ecopoint: Antarctica)));
+            Small Message(Event Player, Value In Array(Global.stringArrayFog, True));
+        Else If(Compare(Current Map, ==, Map(Necropolis)));
+            Small Message(Event Player, Value In Array(Global.stringArrayFog, 2));
+        Else;
+            Small Message(Event Player, First Of(Global.stringArrayFog));
+        End;
+        "Team 2 players cannot see where they are."
+        Start Forcing Player Outlines(Event Player, All Players(Team 2), False, White);
+        Disable Nameplates(Event Player, All Players(Team 2));
+        Start Scaling Player(Event Player, 0.9, True);
+        Start Scaling Barriers(Event Player, 0.9, True);
+        If(Is Game In Progress);
+            Disable Built-In Game Mode Respawning(Event Player);
+            Big Message(Event Player, Global.stringObjectiveSurvivors);
+    }
+}
+
+rule ("Common Subroutine") {
+    event {
+        Subroutine;
+        commonSub;
+    }
+    actions {
+        "This fog is unique to the player, that way they always see fogDistance meters ahead of them."
+        Create Effect(Event Player, Bad Aura, White, Add(Eye Position(Event Player), Multiply(Facing Direction Of(Event Player), Global.fogDistance)), 100, Visible To Position and Radius);
+        Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
+        Create Effect(Event Player, Bad Aura, White, Add(Eye Position(Event Player), Multiply(Facing Direction Of(Event Player), Add(Global.fogDistance, 2))), 100, Visible To Position and Radius);
+        Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
+        Create Effect(Event Player, Bad Aura, White, Add(Eye Position(Event Player), Multiply(Facing Direction Of(Event Player), Multiply(-1, Global.fogDistance))), 100, Visible To Position and Radius);
+        Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
+        Wait(0.5, Ignore Condition);
+        Heal(Event Player, Null, 1000);
+        Wait(True, Ignore Condition);
+        Set Healing Dealt(Event Player, 0);
+        Set Player Variable(Event Player, prevHero, Hero Of(Event Player));
+    }
+}
+
+rule ("Player Dies due to teammate") {
+    event {
+        Player Died;
+        Team 2;
+        All;
+    }
+    conditions {
+        (Event Player).throwingPlayer != Null;
+        Attacker != Players In Slot(False, Team 1);
+    }
+    actions {
+        "If a troll was successful, this makes sure that the player trolled is not punished, but instead the troll. This only works with Winston and Tracer."
+        Kill((Event Player).throwingPlayer, Event Player);
+        Small Message((Event Player).throwingPlayer, Global.stringTeamKill);
+        Set Player Variable(Event Player, throwingPlayer, Null);
+        Wait(0.2, Ignore Condition);
+        Respawn(Event Player);
+    }
+}
+
+rule ("Reset Player Throw Status") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        All;
+    }
+    conditions {
+        Is On Ground(Event Player) == True;
+        (Event Player).throwingPlayer != Null;
+    }
+    actions {
+        Wait(0.5, Abort When False);
+        Set Player Variable(Event Player, throwingPlayer, Null);
+    }
+}
+
+rule ("Hide Info HUD") {
+    event {
+        Ongoing - Each Player;
+        All;
+        All;
+    }
+    conditions {
+        Is Button Held(Event Player, Interact) == True;
+        Is Button Held(Event Player, Crouch) == True;
+    }
+    actions {
+        If(Compare((Event Player).hideInfo, ==, False));
+            Set Player Variable(Event Player, hideInfo, True);
+        Else;
+            Set Player Variable(Event Player, hideInfo, False);
+    }
+}
+
+rule ("Player Clean-up Team 2") {
+    event {
+        Player Left Match;
+        All;
+        All;
+    }
+    actions {
+        For Global Variable(i, False, 8, True);
+            If(Not(Entity Exists(Players In Slot(Global.i, Team 2))));
+                For Global Variable(j, False, Count Of(Value In Array(Global.hudIDs, Global.i)), True);
+                    Destroy HUD Text(Value In Array(Value In Array(Global.hudIDs, Global.i), Global.j));
+                    Set Global Variable At Index(hudIDs, Global.i, Empty Array);
+                End;
+                For Global Variable(j, False, Count Of(Value In Array(Global.effectIDs, Global.i)), True);
+                    Destroy Effect(Value In Array(Value In Array(Global.effectIDs, Global.i), Global.j));
+                    Set Global Variable At Index(effectIDs, Global.i, Empty Array);
+                End;
+                For Global Variable(j, False, Count Of(Value In Array(Global.inWorldTextIDs, Global.i)), True);
+                    Destroy In-World Text(Value In Array(Value In Array(Global.inWorldTextIDs, Global.i), Global.j));
+                    Set Global Variable At Index(inWorldTextIDs, Global.i, Empty Array);
+                End;
+            End;
+        End;
+    }
+}
+
+rule ("Assembly Players Team 2 Clean-Up") {
+    event {
+        Ongoing - Global;
+    }
+    actions {
+        For Global Variable(i, False, 8, True);
+            For Global Variable(j, False, Count Of(Value In Array(Global.hudIDs, Global.i)), True);
+                Destroy HUD Text(Value In Array(Value In Array(Global.hudIDs, Global.i), Global.j));
+            End;
+            Set Global Variable At Index(hudIDs, Global.i, Empty Array);
+            For Global Variable(j, False, Count Of(Value In Array(Global.effectIDs, Global.i)), True);
+                Destroy Effect(Value In Array(Value In Array(Global.effectIDs, Global.i), Global.j));
+            End;
+            Set Global Variable At Index(effectIDs, Global.i, Empty Array);
+            For Global Variable(j, False, Count Of(Value In Array(Global.inWorldTextIDs, Global.i)), True);
+                Destroy In-World Text(Value In Array(Value In Array(Global.inWorldTextIDs, Global.i), Global.j));
+            End;
+            Set Global Variable At Index(inWorldTextIDs, Global.i, Empty Array);
+            Remove All Health Pools From Player(Players In Slot(Global.i, Team 2));
+        End;
+    }
+}
+
+rule ("Player Reset") {
+    event {
+        Subroutine;
+        playerReset;
+    }
+    actions {
+        For Player Variable(Event Player, k, False, Count Of(Value In Array(Global.hudIDs, Slot Of(Event Player))), True);
+            Destroy HUD Text(Value In Array(Value In Array(Global.hudIDs, Slot Of(Event Player)), (Event Player).k));
+        End;
+        Set Global Variable At Index(hudIDs, Slot Of(Event Player), Empty Array);
+        For Player Variable(Event Player, k, False, Count Of(Value In Array(Global.effectIDs, Slot Of(Event Player))), True);
+            Destroy Effect(Value In Array(Value In Array(Global.effectIDs, Slot Of(Event Player)), (Event Player).k));
+        End;
+        Set Global Variable At Index(effectIDs, Slot Of(Event Player), Empty Array);
+        For Player Variable(Event Player, k, False, Count Of(Value In Array(Global.inWorldTextIDs, Slot Of(Event Player))), True);
+            Destroy In-World Text(Value In Array(Value In Array(Global.inWorldTextIDs, Slot Of(Event Player)), (Event Player).k));
+        End;
+        Set Global Variable At Index(inWorldTextIDs, Slot Of(Event Player), Empty Array);
+        Remove All Health Pools From Player(Event Player);
+        Set Max Health(Event Player, 100);
+        Create HUD Text(If-Then-Else(Compare(Health(Event Player), >, 150), Event Player, Empty Array), Custom String("{0}: {1}", Icon String(Heart), Round To Integer(Divide(Health(Event Player), 150), Up), Null), Null, Null, Top, 0.5, Green, White, White, Visible To and String, Default Visibility);
+        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+        Create HUD Text(If-Then-Else(Compare(Health(Event Player), <=, 150), Event Player, Empty Array), Custom String("{0}: {1}", Icon String(Heart), Round To Integer(Divide(Health(Event Player), 150), Up), Null), Global.stringOneHit, Null, Top, 0.5, Red, White, White, Visible To and String, Default Visibility);
+        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+    }
+}
+
+rule ("Brigitte Spawn") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Brigitte;
+    }
+    conditions {
+        Is Alive(Event Player) == True;
+        Or(Is Game In Progress, Is Waiting For Players) == True;
+        Has Spawned(Event Player) == True;
+        (Event Player).lateJoin == False;
+    }
+    actions {
+        Wait(0.5, Abort When False);
+        If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
+            Call Subroutine(playerReset);
+            Wait(0.1, Ignore Condition);
+        End;
+        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0} : {1}", Ability Icon String(Hero(Brigitte), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Brigitte), Button(Secondary Fire)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Primary Fire)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Yellow, White, White, Visible To and String, Default Visibility);
+        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+        Set Max Health(Event Player, Multiply(Divide(20, Max Health(Event Player)), 100));
+        Add Health Pool To Player(Event Player, Health, 180, True, True);
+        Call Subroutine(commonSub);
+        Set Ability Cooldown(Event Player, Button(Ability 1), False);
+    }
+}
+
+rule ("Using Shield Bash") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Brigitte;
+    }
+    conditions {
+        Ability Cooldown(Event Player, Button(Primary Fire)) > 0;
+    }
+    actions {
+        "To counter balancing patches."
+        Set Ability Cooldown(Event Player, Button(Primary Fire), 7.0);
+    }
+}
+
+rule ("Using Flail") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Brigitte;
+    }
+    conditions {
+        Is Using Ability 1(Event Player) == False;
+        (Event Player).hasSpawned == True;
+    }
+    actions {
+        "To counter balancing patches."
+        Set Ability Cooldown(Event Player, Button(Ability 1), 4.0);
+    }
+}
+
+rule ("Moira Spawn") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Moira;
+    }
+    conditions {
+        Is Alive(Event Player) == True;
+        Or(Is Game In Progress, Is Waiting For Players) == True;
+        Has Spawned(Event Player) == True;
+        (Event Player).lateJoin == False;
+    }
+    actions {
+        Wait(0.5, Abort When False);
+        If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
+            Call Subroutine(playerReset);
+            Wait(0.1, Ignore Condition);
+        End;
+        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Moira), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Zenyatta), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Purple, White, White, Visible To and String, Default Visibility);
+        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+        Set Max Health(Event Player, Multiply(Divide(200, Max Health(Event Player)), 100));
+        Call Subroutine(commonSub);
+        Set Ability Cooldown(Event Player, Button(Ability 1), False);
+        Create Icon(If-Then-Else(And(And(And(Is In Line of Sight(Event Player, Player Closest To Reticle(Event Player, Team 2), Barriers Do Not Block LOS), Is In View Angle(Event Player, Player Closest To Reticle(Event Player, Team 2), 20)), Compare(Health(Player Closest To Reticle(Event Player, Team 2)), <, Max Health(Player Closest To Reticle(Event Player, Team 2)))), Is Alive(Player Closest To Reticle(Event Player, Team 2))), Event Player, Empty Array), Player Closest To Reticle(Event Player, Team 2), Heart, Visible To and Position, Green, False);
+        Set Player Variable(Event Player, survivorSpecificVariable2, Last Created Entity);
+        Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
+    }
+}
+
+rule ("Moira Clipping I") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Moira;
+    }
+    conditions {
+        Is Using Ability 1(Event Player) == True;
+    }
+    actions {
+        "Like Reaper, Moira can no clip too, but to prevent exploits she is also teleported to NWP when she is done, to prevent hiding outside the map or in the environment."
+        Disable Movement Collision With Environment(Event Player, False);
+    }
+}
+
+rule ("Moira Clipping II") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Moira;
+    }
+    conditions {
+        Is Using Ability 1(Event Player) == False;
+    }
+    actions {
+        Enable Movement Collision With Environment(Event Player);
+        Teleport(Event Player, Nearest Walkable Position(Position Of(Event Player)));
+        "Cooldown is manually set to counter balancing patches."
+        Set Ability Cooldown(Event Player, Button(Ability 1), 9);
+    }
+}
+
+rule ("Moira Healing") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Moira;
+    }
+    conditions {
+        Is In Line of Sight(Event Player, Player Closest To Reticle(Event Player, Team 2), Barriers Do Not Block LOS) == True;
+        Is In View Angle(Event Player, Player Closest To Reticle(Event Player, Team 2), 20) == True;
+        Is Button Held(Event Player, Ability 2) == True;
+        Health(Player Closest To Reticle(Event Player, Team 2)) < Max Health(Player Closest To Reticle(Event Player, Team 2));
+        Is Alive(Player Closest To Reticle(Event Player, Team 2)) == True;
+        Is Alive(Event Player) == True;
+        Ability Cooldown(Event Player, Button(Ability 2)) == 0;
+    }
+    actions {
+        "Moira's healing is unique. She takes a chunk of her health pool to heal someone else. However, she can die during this process."
+        Set Player Variable(Event Player, survivorSpecificVariable, Player Closest To Reticle(Event Player, Team 2));
+        Heal((Event Player).survivorSpecificVariable, Event Player, 150);
+        Small Message((Event Player).survivorSpecificVariable, Custom String("{0} {1}: {2}", Hero Icon String(Hero(Moira)), Event Player, Global.stringMoiraHeal));
+        If(Compare((Event Player).survivorSpecificVariable, !=, Null));
+            Play Effect(All Players(All Teams), Good Explosion, Green, (Event Player).survivorSpecificVariable, 2);
+            Set Ability Cooldown(Event Player, Button(Ability 2), 60);
+    }
+}
+
+rule ("Winston Spawn") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Winston;
+    }
+    conditions {
+        Is Alive(Event Player) == True;
+        Or(Is Game In Progress, Is Waiting For Players) == True;
+        Has Spawned(Event Player) == True;
+        (Event Player).lateJoin == False;
+    }
+    actions {
+        Wait(0.5, Abort When False);
+        If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
+            Call Subroutine(playerReset);
+            Wait(0.1, Ignore Condition);
+        End;
+        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0} : {1}", Ability Icon String(Hero(Winston), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Mercy), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, White, White, White, Visible To and String, Default Visibility);
+        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+        Create Effect(Event Player, Ring, White, Position Of(Event Player), 6, Visible To Position and Radius);
+        Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
+        Set Max Health(Event Player, Multiply(Divide(20, Max Health(Event Player)), 100));
+        Add Health Pool To Player(Event Player, Health, 180, True, True);
+        Call Subroutine(commonSub);
+        Set Ability Cooldown(Event Player, Button(Ability 1), False);
+    }
+}
+
+rule ("Winston Grab") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Winston;
+    }
+    conditions {
+        Is Alive(Event Player) == True;
+        (Event Player).survivorSpecificVariable == Null;
+        Is Button Held(Event Player, Secondary Fire) == True;
+        Ability Cooldown(Event Player, Button(Ability 2)) == 0;
+        Is Alive(Player Closest To Reticle(Event Player, Team 2)) == True;
+        Hero Of(Player Closest To Reticle(Event Player, Team 2)) != Hero(Winston);
+        (Player Closest To Reticle(Event Player, Team 2)).winstonGrab == False;
+        Is In Line of Sight(Event Player, Player Closest To Reticle(Event Player, Team 2), Barriers Do Not Block LOS) == True;
+        Is In View Angle(Event Player, Player Closest To Reticle(Event Player, Team 2), 20) == True;
+        Distance Between(Event Player, Player Closest To Reticle(Event Player, Team 2)) <= 6;
+    }
+    actions {
+        "Winston's grab is very picky, but once done will make sure the player is on top of him, and hacked to prevent weird ability glitches (or exploits)."
+        Set Ability Cooldown(Event Player, Button(Ability 2), 3);
+        Set Ability Cooldown(Event Player, Button(Ability 1), 2);
+        Set Player Variable(Event Player, survivorSpecificVariable, Player Closest To Reticle(Event Player, Team 2));
+        Wait(0.1, Ignore Condition);
+        Attach Players((Event Player).survivorSpecificVariable, Event Player, Vector(False, 2, False));
+        Set Player Variable((Event Player).survivorSpecificVariable, winstonGrab, True);
+        Set Status((Event Player).survivorSpecificVariable, Null, Hacked, 9999);
+        Small Message((Event Player).survivorSpecificVariable, Custom String("{0} {1}: {2}", Hero Icon String(Hero(Winston)), Event Player, Global.stringWinstonGrab));
+    }
+}
+
+rule ("Winston Throw") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Winston;
+    }
+    conditions {
+        (Event Player).survivorSpecificVariable != Null;
+        Is Button Held(Event Player, Secondary Fire) == True;
+        Ability Cooldown(Event Player, Button(Ability 2)) == 0;
+        ((Event Player).survivorSpecificVariable).winstonGrab == True;
+    }
+    actions {
+        Set Ability Cooldown(Event Player, Button(Ability 2), 5);
+        Wait(0.1, Ignore Condition);
+        Set Player Variable((Event Player).survivorSpecificVariable, throwingPlayer, Event Player);
+        Detach Players((Event Player).survivorSpecificVariable);
+        Set Player Variable((Event Player).survivorSpecificVariable, winstonGrab, False);
+        Clear Status((Event Player).survivorSpecificVariable, Hacked);
+        Apply Impulse((Event Player).survivorSpecificVariable, Facing Direction Of(Event Player), 40, To World, Cancel Contrary Motion);
+        Set Player Variable(Event Player, survivorSpecificVariable, Null);
+    }
+}
+
+rule ("Winston Grab Clear Up") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Winston;
+    }
+    conditions {
+        (Event Player).survivorSpecificVariable != Null;
+        Or(Not(Entity Exists((Event Player).survivorSpecificVariable)), Is Dead((Event Player).survivorSpecificVariable)) == True;
+    }
+    actions {
+        "In case something weird happens, this rule exists to clear up the variables so the ability doesn't get soft locked."
+        Detach Players((Event Player).survivorSpecificVariable);
+        Set Player Variable((Event Player).survivorSpecificVariable, winstonGrab, False);
+        Clear Status((Event Player).survivorSpecificVariable, Hacked);
+        Set Player Variable(Event Player, survivorSpecificVariable, Null);
+    }
+}
+
+rule ("Winston Player Escape") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Winston;
+    }
+    conditions {
+        (Event Player).survivorSpecificVariable != Null;
+        Entity Exists((Event Player).survivorSpecificVariable) == True;
+        Is Alive((Event Player).survivorSpecificVariable) == True;
+        Is Button Held((Event Player).survivorSpecificVariable, Jump) == True;
+    }
+    actions {
+        "Not everyone wants to be captive to Winston, or trolled. This exists to allow them to escape. Since there is a cooldown for the grab, this should be enough for them to get away from a troll."
+        Detach Players((Event Player).survivorSpecificVariable);
+        Set Player Variable((Event Player).survivorSpecificVariable, winstonGrab, False);
+        Clear Status((Event Player).survivorSpecificVariable, Hacked);
+        Set Player Variable(Event Player, survivorSpecificVariable, Null);
+    }
+}
+
+rule ("Set Winston Leap Cooldown") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Winston;
+    }
+    conditions {
+        Is Using Ability 1(Event Player) == False;
+    }
+    actions {
+        "To counter balancing patches."
+        Set Ability Cooldown(Event Player, Button(Ability 1), 9);
+    }
+}
+
+rule ("Tracer Spawn") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Tracer;
+    }
+    conditions {
+        Is Alive(Event Player) == True;
+        Or(Is Game In Progress, Is Waiting For Players) == True;
+        Has Spawned(Event Player) == True;
+        (Event Player).lateJoin == False;
+    }
+    actions {
+        Wait(0.5, Abort When False);
+        If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
+            Call Subroutine(playerReset);
+            Wait(0.1, Ignore Condition);
+        End;
+        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Tracer), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Charge(Event Player, Button(Ability 1)), Up), Global.stringCharges, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Tracer), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Orange, White, White, Visible To and String, Default Visibility);
+        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+        Create Effect(Event Player, Ring, Orange, Position Of(Event Player), 6, Visible To Position and Radius);
+        Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
+        Set Max Health(Event Player, Multiply(Divide(100, Max Health(Event Player)), 100));
+        Call Subroutine(commonSub);
+    }
+}
+
+rule ("Tracer Team Warp") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Tracer;
+    }
+    conditions {
+        Is Using Ability 2(Event Player) == True;
+    }
+    actions {
+        "Tracer can teleport people with her when she jukes Reaper out. She doesn't teleport people held by Winston since they will be teleported when he is."
+        Set Player Variable(Event Player, survivorSpecificVariable, Filtered Array(All Players(Team 2), And(And(And(Compare(Distance Between(Event Player, Current Array Element), <=, 6), Is In Line of Sight(Event Player, Current Array Element, Barriers Do Not Block LOS)), Compare(Current Array Element, !=, Event Player)), Compare((Current Array Element).winstonGrab, ==, False))));
+        Wait(0.1, Ignore Condition);
+        If(Or(And(Compare(Count Of((Event Player).survivorSpecificVariable), >, False), Compare((Event Player).survivorSpecificVariable2, <, False)), And(Compare(Count Of((Event Player).survivorSpecificVariable), <=, False), Compare((Event Player).survivorSpecificVariable2, >, False))));
+            Set Status(Value In Array((Event Player).survivorSpecificVariable, (Event Player).survivorSpecificVariable2), Null, Burning, 4);
+    }
+}
+
+rule ("Tracer Team Warp II") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Tracer;
+    }
+    conditions {
+        Is Using Ability 2(Event Player) == False;
+    }
+    actions {
+        For Player Variable(Event Player, survivorSpecificVariable2, False, Count Of((Event Player).survivorSpecificVariable), True);
+            Set Player Variable(Value In Array((Event Player).survivorSpecificVariable, (Event Player).survivorSpecificVariable2), throwingPlayer, Event Player);
+            Play Effect(All Players(All Teams), Good Explosion, Orange, Value In Array((Event Player).survivorSpecificVariable, (Event Player).survivorSpecificVariable2), 2);
+            "This wait ensures that the orange puff affect above plays in the location prior to teleport."
+            Wait(0.1, Ignore Condition);
+            Teleport(Value In Array((Event Player).survivorSpecificVariable, (Event Player).survivorSpecificVariable2), Event Player);
+            Clear Status(Value In Array((Event Player).survivorSpecificVariable, (Event Player).survivorSpecificVariable2), Burning);
+            Small Message(Value In Array((Event Player).survivorSpecificVariable, (Event Player).survivorSpecificVariable2), Custom String("{0} {1}: {2}", Hero Icon String(Hero(Tracer)), Event Player, Global.stringTracerTeleportMessage));
+        End;
+        "This makes sure that the cooldown is always 28 despite Overwatch balance updates."
+        Set Ability Cooldown(Event Player, Button(Ability 2), 28);
+    }
+}
+
+rule ("Wrecking Ball Spawn") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Wrecking Ball;
+    }
+    conditions {
+        Is Alive(Event Player) == True;
+        Or(Is Game In Progress, Is Waiting For Players) == True;
+        Has Spawned(Event Player) == True;
+        (Event Player).lateJoin == False;
+    }
+    actions {
+        Wait(0.5, Abort When False);
+        If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
+            Call Subroutine(playerReset);
+            Wait(0.1, Ignore Condition);
+        End;
+        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Wrecking Ball), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Wrecking Ball), Button(Ultimate)), Custom String("{0}%", Round To Integer(Ultimate Charge Percent(Event Player), Up), Null, Null), Null), Null), Null, Null, Left, False, Turquoise, White, White, Visible To and String, Default Visibility);
+        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+        Set Max Health(Event Player, Multiply(Divide(50, Max Health(Event Player)), 100));
+        Add Health Pool To Player(Event Player, Health, 150, True, True);
+        Call Subroutine(commonSub);
+        Set Ability Cooldown(Event Player, Button(Ability 2), False);
+    }
+}
+
+rule ("Block#12425 - Wrecdking Ball Push Back") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Wrecking Ball;
+    }
+    conditions {
+        Is Using Ability 2(Event Player) == True;
+        First Of((Players In Slot(False, Team 1)).survivorSpecificVariable) == False;
+        Is In Line of Sight(Event Player, Players In Slot(False, Team 1), Barriers Do Not Block LOS) == True;
+        Distance Between(Event Player, Players In Slot(False, Team 1)) <= 7;
+    }
+    actions {
+        "Wrecking Ball can push back Reaper even in wraith form."
+        Apply Impulse(Players In Slot(False, Team 1), Direction Towards(Position Of(Event Player), Eye Position(Players In Slot(False, Team 1))), 20, To World, Cancel Contrary Motion);
+        Wait(0.05, Ignore Condition);
+        Loop If Condition Is True;
+    }
+}
+
+rule ("Block#12425 - Wrecking Ball Mine Stun") {
+    event {
+        Player Dealt Damage;
+        Team 2;
+        Wrecking Ball;
+    }
+    actions {
+        "If Reaper hits a mine, he is stunned."
+        Set Status(Victim, Null, Knocked Down, 3);
+    }
+}
+
+rule ("Force Field Cooldown") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Wrecking Ball;
+    }
+    conditions {
+        Ability Cooldown(Event Player, Button(Ability 2)) >= 0;
+    }
+    actions {
+        Wait(0.1, Ignore Condition);
+        "To counter balancing patches."
+        Set Ability Cooldown(Event Player, Button(Ability 2), 20);
+    }
+}
+
+rule ("Hanzo Spawn") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Hanzo;
+    }
+    conditions {
+        Is Alive(Event Player) == True;
+        Or(Is Game In Progress, Is Waiting For Players) == True;
+        Has Spawned(Event Player) == True;
+        (Event Player).lateJoin == False;
+    }
+    actions {
+        Wait(0.5, Abort When False);
+        If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
+            Call Subroutine(playerReset);
+            Wait(0.1, Ignore Condition);
+        End;
+        Start Forcing Player Outlines(Players In Slot(False, Team 1), Event Player, True, Red);
+        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Hanzo), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Hanzo), Button(Jump)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Blue, White, White, Visible To and String, Default Visibility);
+        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+        Set Max Health(Event Player, Multiply(Divide(200, Max Health(Event Player)), 100));
+        Call Subroutine(commonSub);
+    }
+}
+
+rule ("Hanzo Wall Climbing") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Hanzo;
+    }
+    conditions {
+        Is On Wall(Event Player) == True;
+        Ability Cooldown(Event Player, Button(Ability 2)) == 0;
+        (Event Player).survivorSpecificVariable == False;
+    }
+    actions {
+        Set Player Variable(Event Player, survivorSpecificVariable, True);
+    }
+}
+
+rule ("Hanzo Wall Climb End") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Hanzo;
+    }
+    conditions {
+        Is On Wall(Event Player) == False;
+        Ability Cooldown(Event Player, Button(Ability 2)) == 0;
+        (Event Player).survivorSpecificVariable == True;
+    }
+    actions {
+        "Hanzo's wall climb is put on a cooldown. These rules check and correct any wall climbing during cooldown."
+        Set Ability Cooldown(Event Player, Button(Ability 2), 10);
+        Set Player Variable(Event Player, survivorSpecificVariable, False);
+    }
+}
+
+rule ("Hanzo Wall Climb Prevention") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Hanzo;
+    }
+    conditions {
+        Is On Wall(Event Player) == True;
+        Ability Cooldown(Event Player, Button(Ability 2)) > 0;
+    }
+    actions {
+        Set Status(Event Player, Null, Hacked, 0.2);
+    }
+}
+
+rule ("Hanzo Reaper Ghost Outline Refresh") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Hanzo;
+    }
+    conditions {
+        Value In Array((Players In Slot(2, Team 1)).survivorSpecificVariable, True) == True;
+    }
+    actions {
+        Start Forcing Player Outlines(Players In Slot(2, Team 1), Event Player, True, Red);
+    }
+}
+
+rule ("Hanzo Sonic Arrow Cooldown") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Hanzo;
+    }
+    conditions {
+        Ability Cooldown(Event Player, Button(Ability 1)) > 0;
+    }
+    actions {
+        "To counter balancing patches."
+        Set Ability Cooldown(Event Player, Button(Ability 1), 9);
+    }
+}
+
+rule ("Symmetra Spawn") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Symmetra;
+    }
+    conditions {
+        Is Alive(Event Player) == True;
+        Or(Is Game In Progress, Is Waiting For Players) == True;
+        Has Spawned(Event Player) == True;
+        (Event Player).lateJoin == False;
+    }
+    actions {
+        Wait(0.5, Abort When False);
+        If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
+            Call Subroutine(playerReset);
+            Wait(0.1, Ignore Condition);
+        End;
+        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Symmetra), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Charge(Event Player, Button(Ability 1)), Up), Global.stringCharges, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Symmetra), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Sky Blue, White, White, Visible To and String, Default Visibility);
+        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+        Set Max Health(Event Player, Multiply(Divide(20, Max Health(Event Player)), 100));
+        Add Health Pool To Player(Event Player, Health, 180, True, True);
+        Call Subroutine(commonSub);
+    }
+}
+
+rule ("Teleporter Ability Cooldown") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        Symmetra;
+    }
+    conditions {
+        Ability Cooldown(Event Player, Button(Ability 2)) > 0;
+    }
+    actions {
+        Set Ability Cooldown(Event Player, Button(Ability 2), 30);
+        "because her turret cooldown is still pretty high, and instead of introducing a spam turret meta, we just give her some room to prepare a new defense."
+        Set Ability Charge(Event Player, Button(Ability 1), 3);
+    }
+}
+
+rule ("Reaper Setup") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    actions {
+        Start Modifying Hero Voice Lines(Event Player, -20, True);
+        Set Ability 2 Enabled(Event Player, False);
+        Set Primary Fire Enabled(Event Player, False);
+        Start Scaling Player(Event Player, 1.3, True);
+        Start Damage Modification(Event Player, All Players(Team 2), 1, Receivers Damagers and Damage Percent);
+        Disable Hero HUD(Event Player);
+        Set Respawn Max Time(Event Player, 0.5);
+        Start Heal Over Time(Event Player, Event Player, 9999, 1000);
+        Set Player Variable(Event Player, survivorSpecificVariable5, Vector(False, False, False));
+        "There is a position always tracked for the orb cursor. Since only the player needs to see it, this only runs for the player."
+        If(Not(Is Dummy Bot(Event Player)));
+            Chase Player Variable At Rate(Event Player, survivorSpecificVariable5, Ray Cast Hit Position(Eye Position(Players In Slot(False, Team 1)), Add(Multiply(Facing Direction Of(Players In Slot(False, Team 1)), 1000), Eye Position(Players In Slot(False, Team 1))), Null, All Players(All Teams), False), 10000, Destination and Rate);
+    }
+}
+
+rule ("Reaper HUD and Effects") {
+    event {
+        Ongoing - Global;
+    }
+    actions {
+        Create In-World Text(If-Then-Else(Entity Exists(Players In Slot(2, Team 1)), All Players(Team 1), Empty Array), Global.stringGhost, Players In Slot(2, Team 1), True, Do Not Clip, Visible To Position and String, Purple, Default Visibility);
+        Create HUD Text(Players In Slot(False, Team 1), Custom String("{0}: {1} {2}", Ability Icon String(Hero(Reaper), Button(Ability 1)), Round To Integer(Ability Cooldown(Players In Slot(False, Team 1), Button(Ability 1)), Up), Global.stringSec), Null, Null, Left, True, Purple, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(Players In Slot(False, Team 1), Custom String("{0}: {1} {2}", Ability Icon String(Hero(Reaper), Button(Ability 2)), Round To Integer(Ability Cooldown(Players In Slot(False, Team 1), Button(Ability 2)), Up), Global.stringSec), Null, Null, Left, 1.1, Purple, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(Players In Slot(False, Team 1), Custom String("{0}: ∞", Ability Icon String(Hero(Reaper), Button(Melee)), Null, Null), Null, Null, Left, 1.6, Purple, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(Players In Slot(False, Team 1), Custom String("{0}: {1} {2}", Ability Icon String(Hero(Echo), Button(Ultimate)), Round To Integer((Players In Slot(False, Team 1)).survivorSpecificVariable3, Up), Global.stringSec), Null, Null, Left, 1.3, Purple, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(Players In Slot(False, Team 1), Custom String("{0}: {1} {2}", Icon String(Recycle), Round To Integer((Players In Slot(False, Team 1)).survivorSpecificVariable4, Up), Global.stringSec), Null, Null, Left, 1.4, Purple, White, White, Visible To and String, Default Visibility);
+        Create Effect(If-Then-Else(Compare(Value In Array((Players In Slot(False, Team 1)).survivorSpecificVariable, True), ==, False), Players In Slot(False, Team 1), Empty Array), Orb, Purple, (Players In Slot(False, Team 1)).survivorSpecificVariable5, 2, Visible To Position and Radius);
+        Create In-World Text(If-Then-Else(Compare(First Of((Players In Slot(False, Team 1)).survivorSpecificVariable), ==, False), Players In Slot(False, Team 1), Empty Array), Input Binding String(Button(Secondary Fire)), (Players In Slot(False, Team 1)).survivorSpecificVariable5, True, Clip Against Surfaces, Visible To Position and String, White, Default Visibility);
+        Create In-World Text(If-Then-Else(And(Compare(Value In Array((Players In Slot(False, Team 1)).survivorSpecificVariable, True), ==, False), Compare(First Of((Players In Slot(False, Team 1)).survivorSpecificVariable), ==, True)), Players In Slot(False, Team 1), Empty Array), Custom String("{0} {1} | {2}", Global.stringReaperTeleport, Input Binding String(Button(Primary Fire)), Custom String("{0} {1}", Input Binding String(Button(Secondary Fire)), Global.stringReaperTeleportGhost, Null)), (Players In Slot(False, Team 1)).survivorSpecificVariable5, True, Do Not Clip, Visible To Position and String, White, Default Visibility);
+        Create HUD Text(If-Then-Else(Compare((Players In Slot(False, Team 1)).hideInfo, ==, False), Players In Slot(False, Team 1), Empty Array), Null, Null, Custom String(" \n{0}\n\n{1}", Global.stringReaperTitle, Custom String("{0}\n{1}", Custom String("{0} {1}: {2}", Ability Icon String(Hero(Reaper), Button(Ability 1)), Input Binding String(Button(Ability 1)), Global.stringReaperAbility1), Custom String("{0} {1}: {2}", Ability Icon String(Hero(Reaper), Button(Ability 2)), Input Binding String(Button(Ability 2)), Global.stringReaperAbility2), Null), Null), Left, 1.8, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(If-Then-Else(Compare((Players In Slot(False, Team 1)).hideInfo, ==, False), Players In Slot(False, Team 1), Empty Array), Null, Null, Custom String("{0}\n{1}", Custom String("{0} {1}: {2}", Ability Icon String(Hero(Echo), Button(Ultimate)), Input Binding String(Button(Secondary Fire)), Global.stringReaperAbility3), Custom String("{0} {1}: {2}", Icon String(Recycle), Input Binding String(Button(Ultimate)), Global.stringReaperAbility4), Null), Left, 1.81, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(If-Then-Else(Compare((Players In Slot(False, Team 1)).hideInfo, ==, False), Players In Slot(False, Team 1), Empty Array), Null, Null, Custom String("{0} {1}: {2}", Ability Icon String(Hero(Reaper), Button(Melee)), Input Binding String(Button(Melee)), Global.stringReaperAbility5), Left, 1.82, White, White, White, Visible To and String, Default Visibility);
+    }
+}
+
+rule ("Reaper Spawn") {
+    event {
+        Ongoing - Global;
+    }
+    conditions {
+        Or(Is Game In Progress, Is Waiting For Players) == True;
+        Is Alive(Players In Slot(False, Team 1)) == True;
+        Has Spawned(Players In Slot(False, Team 1)) == True;
+        (Players In Slot(False, Team 1)).hasSpawned == False;
+    }
+    actions {
+        Wait(0.5, Ignore Condition);
+        Set Ability Cooldown(Players On Hero(Hero(Reaper), All Teams), Button(Ability 1), False);
+        If(Is Game In Progress);
+            Set Player Variable(Players In Slot(False, Team 1), hasSpawned, True);
+    }
+}
+
+rule ("Block#12425 - Reaper Cleanup Before Game Start") {
+    event {
+        Ongoing - Global;
+    }
+    conditions {
+        Is Assembling Heroes == True;
+    }
+    actions {
+        "This cleans up the dummy bots Reaper was using before the match and teleportation variables."
+        Destroy Dummy Bot(Team 1, True);
+        Destroy Dummy Bot(Team 1, 2);
+        "This teleport clean up is specifically for the pre-match."
+        Set Player Variable At Index(Players In Slot(False, Team 1), survivorSpecificVariable, False, False);
+        Set Player Variable At Index(Players In Slot(False, Team 1), survivorSpecificVariable, True, False);
+        Enable Movement Collision With Environment(Players In Slot(False, Team 1));
+        Clear Status(Players In Slot(False, Team 1), Phased Out);
+        Stop Chasing Player Variable(Players In Slot(False, Team 1), survivorSpecificVariable2);
+        Stop Forcing Player Position(Players In Slot(False, Team 1));
+        Set Ability 1 Enabled(Players In Slot(False, Team 1), True);
+        Set Melee Enabled(Players In Slot(False, Team 1), True);
+        Set Ability Cooldown(Players In Slot(False, Team 1), Button(Ability 2), 7);
+    }
+}
+
+rule ("Teleport (Start Teleport)") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Is Button Held(Event Player, Ability 2) == True;
+        First Of((Event Player).survivorSpecificVariable) == False;
+        Ability Cooldown(Event Player, Button(Ability 2)) == 0;
+        Has Status(Event Player, Hacked) == False;
+        Has Status(Event Player, Frozen) == False;
+        Has Status(Event Player, Stunned) == False;
+        Has Status(Event Player, Knocked Down) == False;
+        Has Status(Event Player, Asleep) == False;
+        Value In Array((Event Player).survivorSpecificVariable, True) == False;
+        Is Button Held(Event Player, Primary Fire) == False;
+    }
+    actions {
+        "The beginning of Reaper's unique teleport."
+        Set Ability Cooldown(Event Player, Button(Ability 2), 2);
+        Wait(0.1, Ignore Condition);
+        Play Effect(All Players(All Teams), Bad Explosion, Purple, Position Of(Event Player), 3);
+        Set Ability 1 Enabled(Event Player, False);
+        Set Melee Enabled(Event Player, False);
+        Set Invisible(Event Player, All);
+        Set Status(Event Player, Null, Phased Out, 9999);
+        Disable Movement Collision With Environment(Event Player, True);
+        Start Forcing Player Position(Event Player, (Event Player).survivorSpecificVariable2, True);
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, False, True);
+        Set Player Variable(Event Player, survivorSpecificVariable2, Position Of(Event Player));
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, 2, Position Of(Event Player));
+        Chase Player Variable At Rate(Event Player, survivorSpecificVariable2, Value In Array((Event Player).survivorSpecificVariable, 2), Multiply(5, Distance Between(Value In Array((Event Player).survivorSpecificVariable, 2), (Event Player).survivorSpecificVariable2)), Destination and Rate);
+    }
+}
+
+rule ("Teleport (Rise from Ground)") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Is Button Held(Event Player, Primary Fire) == True;
+        First Of((Event Player).survivorSpecificVariable) == True;
+        Value In Array((Event Player).survivorSpecificVariable, True) == False;
+        Ability Cooldown(Event Player, Button(Ability 2)) == 0;
+    }
+    actions {
+        "eventPlayer.theGround = raycast(eventPlayer.getEyePosition(), eventPlayer.getFacingDirection() * 1000 + eventPlayer.getEyePosition(), null, eventPlayer, false).getHitPosition()
+\nThis check is applied due to an exploit on Eichenwalde."
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, 3, Ray Cast Hit Position(Eye Position(Event Player), Add(Multiply(Facing Direction Of(Event Player), 1000), Eye Position(Event Player)), Null, Event Player, False));
+        Disable Movement Collision With Environment(Event Player, True);
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, 4, Add(Value In Array((Event Player).survivorSpecificVariable, 3), Vector(False, -4, False)));
+        Set Player Variable(Event Player, survivorSpecificVariable2, Value In Array((Event Player).survivorSpecificVariable, 4));
+        Chase Player Variable At Rate(Event Player, survivorSpecificVariable2, Value In Array((Event Player).survivorSpecificVariable, 3), 2, Destination and Rate);
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, True, True);
+        Wait(0.25, Ignore Condition);
+        Set Invisible(Event Player, None);
+        "This message serves as a warning for survivors that he is teleporting nearby."
+        Small Message(Filtered Array(All Players(All Teams), Compare(Distance Between(Event Player, Current Array Element), <=, 15)), Custom String("{0} {1}: {2}", Hero Icon String(Hero(Reaper)), Event Player, Global.stringReaperTeleportSpawn));
+    }
+}
+
+rule ("Teleport (Clean up Teleport)") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        (Event Player).survivorSpecificVariable2 == Value In Array((Event Player).survivorSpecificVariable, 3);
+        Value In Array((Event Player).survivorSpecificVariable, True) == True;
+    }
+    actions {
+        "Once he has finished rising, this subroutine will clean up the variables and other adjustments made."
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, False, False);
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, True, False);
+        Enable Movement Collision With Environment(Event Player);
+        Clear Status(Event Player, Phased Out);
+        Stop Chasing Player Variable(Event Player, survivorSpecificVariable2);
+        Stop Forcing Player Position(Event Player);
+        Set Ability 1 Enabled(Event Player, True);
+        Set Melee Enabled(Event Player, True);
+        Set Ability Cooldown(Event Player, Button(Ability 2), 7);
+        "This is to prevent out of bounds teleports. The game waits 0.2 sec to ensure that the out of bounds is really out of bounds."
+        Wait(True, Ignore Condition);
+        If(And(Compare(Distance Between(Nearest Walkable Position(Position Of(Event Player)), Position Of(Event Player)), >=, 2), Not(Is Dummy Bot(Event Player))));
+            Teleport(Event Player, Nearest Walkable Position(Position Of(Event Player)));
+            Play Effect(All Players(All Teams), Bad Explosion, Purple, Position Of(Event Player), 3);
+    }
+}
+
+rule ("Move Player During Teleport") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        First Of((Event Player).survivorSpecificVariable) == True;
+        Value In Array((Event Player).survivorSpecificVariable, True) == False;
+    }
+    actions {
+        If(Or(Compare(X Component Of(Throttle Of(Event Player)), !=, Null), Compare(Z Component Of(Throttle Of(Event Player)), !=, Null)));
+            Value In Array((Event Player).survivorSpecificVariable, 2) += Multiply(Direction From Angles(Add(Horizontal Angle From Direction(Throttle Of(Event Player)), Horizontal Facing Angle Of(Event Player)), 0), Square Root(Add(Multiply(X Component Of(Throttle Of(Event Player)), X Component Of(Throttle Of(Event Player))), Multiply(Z Component Of(Throttle Of(Event Player)), Z Component Of(Throttle Of(Event Player))))));
+        End;
+        If(Is Button Held(Event Player, Jump));
+            Value In Array((Event Player).survivorSpecificVariable, 2) += Vector(False, 0.7, False);
+        End;
+        If(Is Button Held(Event Player, Crouch));
+            Value In Array((Event Player).survivorSpecificVariable, 2) += Vector(False, -0.7, False);
+        End;
+        Wait(0.04, Ignore Condition);
+        Loop If Condition Is True;
+    }
+}
+
+rule ("Wraith (Setup No Clip)") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Is Using Ability 1(Event Player) == True;
+    }
+    actions {
+        "With wraith form Reaper can no clip through walls."
+        Disable Movement Collision With Environment(Event Player, False);
+        Set Melee Enabled(Event Player, False);
+        Set Move Speed(Event Player, 78.889);
+    }
+}
+
+rule ("Wraith (Disable Clipping)") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Is Using Ability 1(Event Player) == False;
+    }
+    actions {
+        Enable Movement Collision With Environment(Event Player);
+        Set Move Speed(Event Player, 100);
+        Wait(0.1, Ignore Condition);
+        Set Ability Cooldown(Event Player, Button(Ability 1), 12);
+        "This is to fix wraith abuse. A technique used is to wraith to get the speed-boost, then while reverting, the player is given a window of opportunity to melee while still be invincible.
+\nThis wait prevents that."
+        Wait(0.1, Ignore Condition);
+        Set Melee Enabled(Event Player, True);
+    }
+}
+
+rule ("Spawn Ghost (Create Dummy Bot)") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Is Button Held(Event Player, Secondary Fire) == True;
+        Is Using Ability 1(Event Player) == False;
+        (Event Player).survivorSpecificVariable3 == 0;
+        Value In Array((Event Player).survivorSpecificVariable, True) == False;
+    }
+    actions {
+        Create Dummy Bot(Hero(Reaper), Team 1, 2, Add(Vector(False, -4, False), Ray Cast Hit Position(Eye Position(Event Player), Add(Multiply(Facing Direction Of(Event Player), 1000), Eye Position(Event Player)), Null, Event Player, False)), Direction From Angles(Horizontal Facing Angle Of(Event Player), 0));
+        Set Player Variable(Event Player, survivorSpecificVariable3, 10);
+        Chase Player Variable At Rate(Event Player, survivorSpecificVariable3, False, True, Destination and Rate);
+        Small Message(Filtered Array(All Players(All Teams), Compare(Distance Between(Ray Cast Hit Position(Eye Position(Event Player), Add(Multiply(Facing Direction Of(Event Player), 1000), Eye Position(Event Player)), Null, Event Player, False), Current Array Element), <=, 15)), Custom String("{0} {1}: {2}", Hero Icon String(Hero(Reaper)), Event Player, Global.stringReaperTeleportSpawn));
+    }
+}
+
+rule ("Ghost Setup (Dummy Bot Setup)") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Slot Of(Event Player) == 2;
+        Is Dummy Bot(Event Player) == True;
+    }
+    actions {
+        "This dummy bot is a setup and forget thing. Once it spawns it will automatically run forwards, sometimes changing direction and wraithing if a survivor is within view."
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, False, True);
+        Start Forcing Throttle(Event Player, True, True, False, True, False, True);
+        "The following rules are to get it read for the Rise from Ground rule."
+        Disable Movement Collision With Environment(Event Player, True);
+        Set Player Variable(Event Player, survivorSpecificVariable2, Position Of(Event Player));
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, 3, Add(Position Of(Event Player), Vector(False, 4, False)));
+        Start Forcing Player Position(Event Player, (Event Player).survivorSpecificVariable2, True);
+        Wait(True, Ignore Condition);
+        Chase Player Variable At Rate(Event Player, survivorSpecificVariable2, Value In Array((Event Player).survivorSpecificVariable, 3), 2, Destination and Rate);
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, True, True);
+        "Before the ghost fully emerges and is fully spawned, effects are set up."
+        Wait(0.5, Ignore Condition);
+        Set Status(Event Player, Null, Phased Out, 9999);
+        Disable Movement Collision With Environment(Event Player, False);
+        Start Forcing Player Outlines(Event Player, All Players(Team 1), True, Purple);
+        Set Ability Cooldown(Event Player, Button(Ability 1), False);
+    }
+}
+
+rule ("Ghost Died (Destroy Bot if dead)") {
+    event {
+        Player Died;
+        Team 1;
+        Slot 2;
+    }
+    conditions {
+        Is Dummy Bot(Event Player) == True;
+        Hero Of(Event Player) == Hero(Reaper);
+    }
+    actions {
+        "If the dummy bot somehow dies, it is deleted so it doesn't just respawn randomly."
+        Destroy Dummy Bot(Team 1, 2);
+    }
+}
+
+rule ("Ghost Spawn CD Reset") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        (Event Player).survivorSpecificVariable3 == 0;
+    }
+    actions {
+        Stop Chasing Player Variable(Event Player, survivorSpecificVariable3);
+    }
+}
+
+rule ("Ghost Teleport") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Is In Air(Event Player) == True;
+        Is Dummy Bot(Event Player) == True;
+        First Of((Event Player).survivorSpecificVariable) == False;
+        Value In Array((Event Player).survivorSpecificVariable, True) == False;
+    }
+    actions {
+        "The dummy bot tries to prevent suicide. If it starts falling it is assumed that it will die (whether that is true or not), so it teleports to the closest area and continues it's path."
+        Wait(0.5, Abort When False);
+        Teleport(Event Player, Nearest Walkable Position(Position Of(Event Player)));
+        Set Facing(Event Player, Vector(Random Real(-1, -0.1), False, Random Real(-1, -0.1)), To Player);
+    }
+}
+
+rule ("Ghost Chase") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Is Dummy Bot(Event Player) == True;
+        First Of((Event Player).survivorSpecificVariable) == False;
+        Value In Array((Event Player).survivorSpecificVariable, True) == False;
+        Is True For Any(Players in View Angle(Event Player, Team 2, 30), Is In Line of Sight(Eye Position(Event Player), Eye Position(Current Array Element), Barriers Do Not Block LOS)) == True;
+        Ability Cooldown(Event Player, Button(Ability 1)) == 0;
+        Hero Of(Event Player) == Hero(Reaper);
+    }
+    actions {
+        "This is here to scare the player into reacting."
+        Press Button(Event Player, Ability 1);
+        Set Facing(Event Player, Direction Towards(Event Player, Player Closest To Reticle(Event Player, Team 2)), To World);
+        "This is here to provide info for decoy swap. If the decoy sees a player and starts chasing, the Reaper may want to swap position and confuse the survivor, or take advantage of them not reacting."
+        Small Message(Players In Slot(False, Team 1), Custom String("{0} {1}: {2}", Hero Icon String(Hero(Reaper)), Global.stringGhost, Global.stringChase));
+    }
+}
+
+rule ("Restore No-Clip after Rising") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Is Dummy Bot(Event Player) == True;
+        First Of((Event Player).survivorSpecificVariable) == False;
+        Value In Array((Event Player).survivorSpecificVariable, True) == False;
+        Is Using Ability 1(Event Player) == False;
+    }
+    actions {
+        "The decoy is always no clipped. It is both easier for it to roam and also a sign for survivors to note."
+        Disable Movement Collision With Environment(Event Player, False);
+        Set Status(Event Player, Null, Phased Out, 9999);
+    }
+}
+
+rule ("Ghost Swap (Dummy Bot Swap Positions)") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Is Button Held(Event Player, Ultimate) == True;
+        First Of((Event Player).survivorSpecificVariable) == False;
+        Entity Exists(Players In Slot(2, Team 1)) == True;
+        (Event Player).survivorSpecificVariable4 == 0;
+        Is Using Ability 1(Event Player) == False;
+        Has Status(Event Player, Hacked) == False;
+        Has Status(Event Player, Frozen) == False;
+        Has Status(Event Player, Stunned) == False;
+        Has Status(Event Player, Knocked Down) == False;
+        Has Status(Event Player, Asleep) == False;
+    }
+    actions {
+        "Ghost swap ensures that, if done right, it is unnoticeable to the survivor. This means that the change has to be instant (so position variables have to be stored) and they are facing the same direction (another variable stored)"
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, 5, Position Of(Players In Slot(2, Team 1)));
+        Set Player Variable At Index(Event Player, survivorSpecificVariable, 6, Facing Direction Of(Players In Slot(2, Team 1)));
+        Teleport(Players In Slot(2, Team 1), Event Player);
+        Set Facing(Players In Slot(2, Team 1), Facing Direction Of(Event Player), To World);
+        Wait(0.1, Ignore Condition);
+        "In case the swap was in mid air, the decoy will retreat to NWP."
+        Teleport(Event Player, Nearest Walkable Position(Value In Array((Event Player).survivorSpecificVariable, 5)));
+        Set Facing(Event Player, Value In Array((Event Player).survivorSpecificVariable, 6), To World);
+        Set Player Variable(Event Player, survivorSpecificVariable4, 20);
+        Chase Player Variable At Rate(Event Player, survivorSpecificVariable4, False, True, Destination and Rate);
+    }
+}
+
+rule ("Ghost Swap Cooldown Reset") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        (Event Player).survivorSpecificVariable4 == 0;
+    }
+    actions {
+        Stop Chasing Player Variable(Event Player, survivorSpecificVariable4);
+    }
+}
+
+rule ("Reaper Melee on Primary Fire") {
+    event {
+        Ongoing - Each Player;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Is Button Held(Event Player, Primary Fire) == True;
+        First Of((Event Player).survivorSpecificVariable) == False;
+    }
+    actions {
+        "As a community request, the melee can also be done on primary fire (though the game will still refer for the melee button in the info)."
+        Press Button(Event Player, Melee);
+    }
+}
+
+rule ("Reaper Melee Stun") {
+    event {
+        Player Dealt Damage;
+        Team 1;
+        Reaper;
+    }
+    conditions {
+        Is Meleeing(Event Player) == True;
+    }
+    actions {
+        "If Reaper lands a hit, he is stunned to give the victim time to reposition."
+        Set Status(Event Player, Null, Stunned, 3);
+        Small Message(Event Player, Custom String("Successful hit! Recharging...", Null, Null, Null));
+    }
+}
+
+rule ("Initial Setup (Global Setup)") {
+    event {
+        Ongoing - Global;
+    }
+    actions {
+        Disable Built-In Game Mode Music;
+        Disable Built-In Game Mode Announcer;
+        Disable Built-In Game Mode Completion;
+        Disable Built-In Game Mode Scoring;
+        Call Subroutine(nameTagCreate);
+        Set Global Variable(gracePeriod, 30);
+        Set Global Variable(tipsEnabled, Workshop Setting Toggle(Custom String("General", Null, Null, Null), Custom String("Info Displayed by Default", Null, Null, Null), True));
+        Set Global Variable(matchTimeMin, Workshop Setting Integer(Custom String("Time", Null, Null, Null), Custom String("Minutes", Null, Null, Null), 4, 1, 20));
+        Set Global Variable(matchTimeSec, Workshop Setting Integer(Custom String("Time", Null, Null, Null), Custom String("Seconds", Null, Null, Null), 30, 0, 59));
+        Set Global Variable(debugMode, Workshop Setting Toggle(Custom String("Debug Mode", Null, Null, Null), Custom String("Enabled", Null, Null, Null), False));
+        "If debug mode is disabled, recording is also disabled to save server resources."
+        Set Global Variable(hudIDs, Empty Array);
+        Set Global Variable(effectIDs, Empty Array);
+        Set Global Variable(inWorldTextIDs, Empty Array);
+        If(Compare(Global.debugMode, ==, False));
+            Disable Inspector Recording;
+    }
+}
+
+rule ("Initial Setup (Per Player Setup)") {
+    event {
+        Ongoing - Each Player;
+        All;
+        All;
+    }
+    conditions {
+        Or(Is Waiting For Players, Is Game In Progress) == True;
+    }
+    actions {
+        Disable Hero HUD(Event Player);
+        Disable Game Mode HUD(Event Player);
+        Enable Death Spectate Target HUD(Event Player);
+        Set Player Variable(Event Player, prevHero, Null);
+        If(Compare(Team Of(Event Player), ==, Team 1));
+            Start Forcing Player Outlines(Event Player, All Players(All Teams), False, White);
+            Disable Nameplates(Event Player, All Players(All Teams));
+            Set Respawn Max Time(Event Player, 0.5);
+        Else;
+            Disable Scoreboard(Event Player);
+            Disable Kill Feed(Event Player);
+            Set Player Variable(Event Player, hasSpawned, False);
+        End;
+        If(Compare(Global.tipsEnabled, ==, False));
+            Set Player Variable(Event Player, hideInfo, True);
+    }
+}
+
+rule ("Pre-Match HUD & In-world Effect Creation") {
+    event {
+        Ongoing - Global;
+    }
+    actions {
+        "Global HUD setup"
+        Create HUD Text(If-Then-Else(Is Game In Progress, All Players(All Teams), Empty Array), Custom String("{0}: {1}", Global.stringTimeRemaining, Round To Integer(Match Time, Up), Null), Null, Null, Top, False, Orange, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(If-Then-Else(Is Game In Progress, All Players(Team 2), Empty Array), Null, Null, Global.stringObjectiveSurvivors, Top, -1, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(If-Then-Else(Is Game In Progress, All Players(Team 1), Empty Array), Null, Null, Global.stringObjectiveReaper, Top, -1, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(All Players(All Teams), Custom String("Project: Phantom", Null, Null, Null), Null, Null, Right, -5, Purple, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(All Players(All Teams), Null, Global.stringCreatorVersion, Custom String(" ", Null, Null, Null), Right, -4, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(All Players(All Teams), Null, Null, Global.stringDiscord, Right, -3, White, White, Orange, Visible To and String, Default Visibility);
+        Create HUD Text(All Players(All Teams), Null, Null, Global.stringProject, Right, -2, White, White, Orange, Visible To and String, Default Visibility);
+        Create HUD Text(All Players(All Teams), Null, Null, Global.stringCode, Right, -1, White, White, Aqua, Visible To and String, Default Visibility);
+        Create HUD Text(Filtered Array(All Players(Team 2), Compare((Current Array Element).winstonGrab, ==, True)), Custom String("{0}: {1}", Input Binding String(Button(Jump)), Global.stringWinstonRide, Null), Null, Null, Top, True, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(All Players(Team 2), Null, Null, Global.stringTip, Left, 3, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(All Players(All Teams), Null, Null, Custom String(" \n{0}", Global.stringGH, Null, Null), Right, -0.92, White, White, Yellow, Visible To and String, Default Visibility);
+        Create HUD Text(All Players(All Teams), Null, Null, Global.stringGHDiscord, Right, -0.91, White, White, Yellow, Visible To and String, Default Visibility);
+        "Late Join HUD Setup"
+        Create HUD Text(Filtered Array(All Players(Team 2), Compare((Current Array Element).lateJoin, ==, True)), Global.stringLateJoin, Null, Null, Top, 2, Yellow, White, White, Visible To and String, Default Visibility);
+        "Show/hide info setup"
+        Create HUD Text(Filtered Array(All Players(All Teams), Compare((Current Array Element).hideInfo, ==, True)), Null, Null, Custom String(" \n{0} + {1}: {2}", Input Binding String(Button(Interact)), Input Binding String(Button(Crouch)), Global.stringShowInfo), Left, 2, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(Filtered Array(All Players(All Teams), Compare((Current Array Element).hideInfo, ==, False)), Null, Null, Custom String(" \n{0} + {1}: {2}", Input Binding String(Button(Interact)), Input Binding String(Button(Crouch)), Global.stringHideInfo), Left, 2, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(If-Then-Else(Is Waiting For Players, All Players(All Teams), Empty Array), Null, Null, Custom String("{0} ({1})", Global.stringWaitingGame, Host Player, Null), Top, -1, White, White, White, Visible To Sort Order and String, Default Visibility);
+        "Survivor Info HUD Setup"
+        Create HUD Text(Filtered Array(All Players(Team 2), And(Compare(Hero Of(Current Array Element), ==, Hero(Moira)), Compare((Current Array Element).hideInfo, ==, False))), Null, Null, Custom String(" \n{0}\n\n{1}", Global.stringMoiraTitle, Custom String("{0}\n{1}\n{2}", Custom String("{0} {1}: {2}", Ability Icon String(Hero(Moira), Button(Ability 1)), Input Binding String(Button(Ability 1)), Global.stringMoiraAbility1), Custom String("{0} {1}: {2}", Ability Icon String(Hero(Zenyatta), Button(Ability 1)), Input Binding String(Button(Ability 2)), Global.stringMoiraAbility2), Global.stringMoiraPassive), Null), Left, True, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(Filtered Array(All Players(Team 2), And(Compare(Hero Of(Current Array Element), ==, Hero(Hanzo)), Compare((Current Array Element).hideInfo, ==, False))), Null, Null, Custom String(" \n{0}\n\n{1}", Global.stringHanzoTitle, Custom String("{0}\n{1}\n{2}", Custom String("{0} {1}: {2}", Ability Icon String(Hero(Hanzo), Button(Ability 1)), Input Binding String(Button(Ability 1)), Global.stringHanzoAbility1), Custom String("{0} {1}: {2}", Ability Icon String(Hero(Hanzo), Button(Jump)), Input Binding String(Button(Jump)), Global.stringHanzoAbility2), Global.stringHanzoPassive), Null), Left, True, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(Filtered Array(All Players(Team 2), And(Compare(Hero Of(Current Array Element), ==, Hero(Brigitte)), Compare((Current Array Element).hideInfo, ==, False))), Null, Null, Custom String(" \n{0}\n\n{1}", Global.stringBrigTitle, Custom String("{0}\n{1}", Custom String("{0} {1}: {2}", Ability Icon String(Hero(Brigitte), Button(Ability 1)), Input Binding String(Button(Ability 1)), Global.stringBrigAbility1), Custom String("{0} {1}: {2}", Ability Icon String(Hero(Brigitte), Button(Secondary Fire)), Input Binding String(Button(Secondary Fire)), Global.stringBrigAbility2), Null), Null), Left, True, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(Filtered Array(All Players(Team 2), And(Compare(Hero Of(Current Array Element), ==, Hero(Wrecking Ball)), Compare((Current Array Element).hideInfo, ==, False))), Null, Null, Custom String(" \n{0}\n\n{1}", Global.stringWBTitle, Custom String("{0}\n{1}", Custom String("{0} {1}: {2}", Ability Icon String(Hero(Wrecking Ball), Button(Ability 2)), Input Binding String(Button(Ability 2)), Global.stringWBAbility1), Custom String("{0} {1}: {2}", Ability Icon String(Hero(Wrecking Ball), Button(Ultimate)), Input Binding String(Button(Ultimate)), Global.stringWBAbility2), Null), Null), Left, True, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(Filtered Array(All Players(Team 2), And(Compare(Hero Of(Current Array Element), ==, Hero(Symmetra)), Compare((Current Array Element).hideInfo, ==, False))), Null, Null, Custom String(" \n{0}\n\n{1}", Global.stringSymTitle, Custom String("{0}\n{1}", Custom String("{0} {1}: {2}", Ability Icon String(Hero(Symmetra), Button(Ability 1)), Input Binding String(Button(Ability 1)), Global.stringSymAbility1), Custom String("{0} {1}: {2}", Ability Icon String(Hero(Symmetra), Button(Ability 2)), Input Binding String(Button(Ability 2)), Global.stringSymAbility2), Null), Null), Left, True, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(Filtered Array(All Players(Team 2), And(Compare(Hero Of(Current Array Element), ==, Hero(Tracer)), Compare((Current Array Element).hideInfo, ==, False))), Null, Null, Custom String(" \n{0}\n\n{1}", Global.stringTracerTitle, Custom String("{0}\n{1}\n{2}", Custom String("{0} {1}: {2}", Ability Icon String(Hero(Tracer), Button(Ability 1)), Input Binding String(Button(Ability 1)), Global.stringTracerAbility1), Custom String("{0} {1}: {2}", Ability Icon String(Hero(Tracer), Button(Ability 2)), Input Binding String(Button(Ability 2)), Global.stringTracerAbility2), Global.stringTracerPassive), Null), Left, True, White, White, White, Visible To and String, Default Visibility);
+        Create HUD Text(Filtered Array(All Players(Team 2), And(Compare(Hero Of(Current Array Element), ==, Hero(Winston)), Compare((Current Array Element).hideInfo, ==, False))), Null, Null, Custom String(" \n{0}\n\n{1}", Global.stringWinstonTitle, Custom String("{0}\n{1}", Custom String("{0} {1}: {2}", Ability Icon String(Hero(Winston), Button(Ability 1)), Input Binding String(Button(Ability 1)), Global.stringWinstonAbility1), Custom String("{0} {1}: {2}", Ability Icon String(Hero(Mercy), Button(Ability 2)), Input Binding String(Button(Secondary Fire)), Global.stringWinstonAbility2), Null), Null), Left, True, White, White, White, Visible To and String, Default Visibility);
+    }
+}
+
+rule ("Nametag In World Text Setup Subroutine") {
+    event {
+        Subroutine;
+        nameTagCreate;
+    }
+    actions {
+        "Nametags are disabled for Team 2 by default, so I created an alternate name tag system. Basically, when one player of team 2 is close to another team 2 player, they get to see each other's nametags."
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(False, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(False, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(False, Team 2))), Compare(Current Array Element, !=, Players In Slot(False, Team 2)))), Players In Slot(False, Team 2), Players In Slot(False, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(True, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(True, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(True, Team 2))), Compare(Current Array Element, !=, Players In Slot(True, Team 2)))), Players In Slot(True, Team 2), Players In Slot(True, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(2, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(2, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(2, Team 2))), Compare(Current Array Element, !=, Players In Slot(2, Team 2)))), Players In Slot(2, Team 2), Players In Slot(2, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(3, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(3, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(3, Team 2))), Compare(Current Array Element, !=, Players In Slot(3, Team 2)))), Players In Slot(3, Team 2), Players In Slot(3, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(4, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(4, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(4, Team 2))), Compare(Current Array Element, !=, Players In Slot(4, Team 2)))), Players In Slot(4, Team 2), Players In Slot(4, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(5, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(5, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(5, Team 2))), Compare(Current Array Element, !=, Players In Slot(5, Team 2)))), Players In Slot(5, Team 2), Players In Slot(5, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(6, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(6, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(6, Team 2))), Compare(Current Array Element, !=, Players In Slot(6, Team 2)))), Players In Slot(6, Team 2), Players In Slot(6, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(7, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(7, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(7, Team 2))), Compare(Current Array Element, !=, Players In Slot(7, Team 2)))), Players In Slot(7, Team 2), Players In Slot(7, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(8, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(8, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(8, Team 2))), Compare(Current Array Element, !=, Players In Slot(8, Team 2)))), Players In Slot(8, Team 2), Players In Slot(8, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(9, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(9, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(9, Team 2))), Compare(Current Array Element, !=, Players In Slot(9, Team 2)))), Players In Slot(9, Team 2), Players In Slot(9, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(10, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(10, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(10, Team 2))), Compare(Current Array Element, !=, Players In Slot(10, Team 2)))), Players In Slot(10, Team 2), Players In Slot(10, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+        Create In-World Text(Filtered Array(All Living Players(Team 2), And(And(And(Compare(Distance Between(Players In Slot(11, Team 2), Current Array Element), <=, 8), Is In Line of Sight(Players In Slot(11, Team 2), Current Array Element, Barriers Do Not Block LOS)), Entity Exists(Players In Slot(11, Team 2))), Compare(Current Array Element, !=, Players In Slot(11, Team 2)))), Players In Slot(11, Team 2), Players In Slot(11, Team 2), True, Clip Against Surfaces, Visible To Position and String, Yellow, Default Visibility);
+    }
+}
+
+rule ("Debug Mode") {
+    event {
+        Subroutine;
+        debugMode;
+    }
+    actions {
+        "A dummy bot for Reaper and Ana is created so that you can test certain stuff. They both occupy slot 0 of each team, so if you don't want them to spawn in, make sure a player is in each of those slots."
+        Create Dummy Bot(Hero(Reaper), Team 1, False, Nearest Walkable Position(Vector(False, False, False)), Null);
+        Create HUD Text(Host Player, Server Load Average, String("Server Load Average", Null, Null, Null), Null, Right, 10, White, White, White, Visible To and String, Default Visibility);
+        Create Dummy Bot(Hero(Ana), Team 2, False, Nearest Walkable Position(Vector(1000, False, False)), Null);
+        Wait(2, Ignore Condition);
+        Damage(Last Created Entity, Null, 150);
+    }
+}
+
+rule ("Gamemode Setup") {
+    event {
+        Ongoing - Global;
+    }
+    conditions {
+        Is Game In Progress == True;
+    }
+    actions {
+        Set Match Time(Add(Multiply(Global.matchTimeMin, 60), Global.matchTimeSec));
+        Big Message(All Players(Team 2), Global.stringObjectiveSurvivors);
+        Big Message(All Players(Team 1), Global.stringObjectiveReaper);
+        If(Compare(Global.debugMode, ==, True));
+            Call Subroutine(debugMode);
+    }
+}
+
+rule ("Winning Setup (Time Runs Out)") {
+    event {
+        Ongoing - Global;
+    }
+    conditions {
+        Is Game In Progress == True;
+        Match Time == 0;
+    }
+    actions {
+        Wait(0.1, Abort When False);
+        "If some living players are still alive for team 2 (that also have spawned in) when time runs out, they win, else Reaper wins. (This else statement solely exists for backup. Practically this will never be executed)."
+        If(Compare(Count Of(Filtered Array(All Living Players(Team 2), Has Spawned(Current Array Element))), >, False));
+            Declare Team Victory(Team 2);
+        Else;
+            Declare Team Victory(Team 1);
+        End;
+        Destroy All Dummy Bots;
+    }
+}
+
+rule ("Winning Setup (Reaper Kills Everyone that spawned on time)") {
+    event {
+        Ongoing - Global;
+    }
+    conditions {
+        Is Game In Progress == True;
+        Count Of(Filtered Array(All Living Players(Team 2), Has Spawned(Current Array Element))) == 0;
+        Match Time < Subtract(Add(Multiply(Global.matchTimeMin, 60), Global.matchTimeSec), Global.gracePeriod);
+        Has Spawned(Players In Slot(False, Team 1)) == True;
+    }
+    actions {
+        "If everyone is dead, Reaper wins."
+        Wait(0.1, Abort When False);
+        Declare Team Victory(Team 1);
+        Destroy All Dummy Bots;
+    }
+}
+
+rule ("Winning Setup (Survivors win if Reaper does not exist)") {
+    event {
+        Ongoing - Global;
+    }
+    conditions {
+        Is Game In Progress == True;
+        Entity Exists(Players In Slot(False, Team 1)) == False;
+        Match Time < Subtract(Add(Multiply(Global.matchTimeMin, 60), Global.matchTimeSec), Global.gracePeriod);
+    }
+    actions {
+        "Backup win condition if Reaper did not spawn in or he disconnected."
+        Wait(0.1, Ignore Condition);
+        Declare Team Victory(Team 2);
+        Destroy All Dummy Bots;
+    }
+}
+
+rule ("Late Join Setup") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        All;
+    }
+    conditions {
+        Has Spawned(Event Player) == False;
+        Is Game In Progress == True;
+        "If a player joins or did not select a character before the grace period (default match time - grace period), then he is considered a late joining player. The game does not consider him to be alive, and when he spawns he is killed immediately."
+        Match Time < Subtract(Add(Multiply(Global.matchTimeMin, 60), Global.matchTimeSec), Global.gracePeriod);
+    }
+    actions {
+        Wait(0.1, Abort When False);
+        Set Player Variable(Event Player, lateJoin, True);
+        Disable Built-In Game Mode Respawning(Event Player);
+    }
+}
+
+rule ("Late Join Kill") {
+    event {
+        Ongoing - Each Player;
+        Team 2;
+        All;
+    }
+    conditions {
+        Is Game In Progress == True;
+        Is Alive(Event Player) == True;
+        Has Spawned(Event Player) == True;
+        (Event Player).lateJoin == True;
+    }
+    actions {
+        Kill(Event Player, Null);
+    }
+}
+
