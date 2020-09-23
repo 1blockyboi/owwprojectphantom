@@ -17,12 +17,13 @@ rule "Tracer Spawn":
     commonSpawnConditions
 
     startProcess
-        hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.TRACER, Button.ABILITY_1), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCharge(Button.ABILITY_1)), stringCharges)), "{0}: {2}".format(abilityIconString(Hero.TRACER, Button.ABILITY_2), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
-        createEffect(eventPlayer, Effect.RING, Color.ORANGE, eventPlayer.getPosition(), 6, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-        effectIDs[eventPlayer.getSlot()].append(getLastCreatedEntity())
-        eventPlayer.setMaxHealth(100 / eventPlayer.getMaxHealth() * 100)
-        commonSub()
+            hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.TRACER, Button.ABILITY_1), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCharge(Button.ABILITY_1)), stringCharges)), "{0}: {2}".format(abilityIconString(Hero.TRACER, Button.ABILITY_2), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+            hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
+            createEffect(eventPlayer, Effect.RING, Color.ORANGE, eventPlayer.getPosition(), 6, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+            effectIDs[eventPlayer.getSlot()].append(getLastCreatedEntity())
+            eventPlayer.setMaxHealth(100 / eventPlayer.getMaxHealth() * 100)
+            commonSub()
+            eventPlayer.setAbilityCooldown(Button.ABILITY_2, 0)
 
 /*
     First rule executed to rewind Tracer and teleport nearby teammates.

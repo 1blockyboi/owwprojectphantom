@@ -20,11 +20,11 @@ rule "Hanzo Spawn":
     commonSpawnConditions 
 
     startProcess
-        getPlayersInSlot(0, Team.1).startForcingOutlineFor(eventPlayer, true, Color.RED)
-        hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.HANZO, Button.ABILITY_1), buttonString(Button.ABILITY_1), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_1)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.HANZO, Button.JUMP), buttonString(Button.JUMP), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.BLUE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
-        eventPlayer.setMaxHealth(200 / eventPlayer.getMaxHealth() * 100)
-        commonSub()
+            getPlayersInSlot(0, Team.1).startForcingOutlineFor(eventPlayer, true, Color.RED)
+            hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.HANZO, Button.ABILITY_1), buttonString(Button.ABILITY_1), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_1)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.HANZO, Button.JUMP), buttonString(Button.JUMP), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.BLUE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+            hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
+            eventPlayer.setMaxHealth(200 / eventPlayer.getMaxHealth() * 100)
+            commonSub()
 
 /*
     Keeps track when Hanzo is wall climbing while the ability is off cooldown.

@@ -75,7 +75,7 @@ rule "Constant Strings":
     stringCodeLink = "8MM16"
     stringProjectLink = "workshop.codes/8MM16"
     stringDiscordLink = "discord.gg/CSKSVDH"
-    stringVersion = "1.1.0"
+    stringVersion = "1.1.1"
     stringCreator = "Block#12425"
     stringGHDiscordLink = "grandeurhammers.com"
 

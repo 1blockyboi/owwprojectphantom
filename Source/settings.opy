@@ -2,7 +2,7 @@
 
 settings {
     "main": {
-        "description": "Project: Phantom. Survive the nightmare until time runs out! Choose from multiple and unique survivors to help both yourself and your teammates. Version 1.1.0. Created by Block#12425. Discord server: https://discord.gg/CSKSVDH"
+        "description": "Project: Phantom. Survive the nightmare until time runs out! Choose from multiple and unique survivors to help both yourself and your teammates. Version 1.1.1. Created by Block#12425. Discord server: https://discord.gg/CSKSVDH"
     },
     "lobby": {
         "allowPlayersInQueue": true,
@@ -14,7 +14,7 @@ settings {
     "gamemodes": {
         "tdm": {
             "enabledMaps": [
-                "ecopointAntarctica",
+                "ecopointAntarcticaWinter",
                 "eichenwaldeHalloween",
                 "necropolis"
             ]

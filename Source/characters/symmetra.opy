@@ -18,11 +18,11 @@ rule "Symmetra Spawn":
     commonSpawnConditions
     
     startProcess
-        hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.SYMMETRA, Button.ABILITY_1), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCharge(Button.ABILITY_1)), stringCharges)), "{0}: {2}".format(abilityIconString(Hero.SYMMETRA, Button.ABILITY_2), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.SKY_BLUE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
-        eventPlayer.setMaxHealth(20 / eventPlayer.getMaxHealth() * 100)
-        eventPlayer.addHealthPool(Health.NORMAL, 180, true, true)
-        commonSub()
+            hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.SYMMETRA, Button.ABILITY_1), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCharge(Button.ABILITY_1)), stringCharges)), "{0}: {2}".format(abilityIconString(Hero.SYMMETRA, Button.ABILITY_2), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.SKY_BLUE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+            hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
+            eventPlayer.setMaxHealth(20 / eventPlayer.getMaxHealth() * 100)
+            eventPlayer.addHealthPool(Health.NORMAL, 180, true, true)
+            commonSub()
 
 /*
     Teleporter Ability cooldown is reset.

@@ -17,14 +17,14 @@ rule "Winston Spawn":
     commonSpawnConditions
 
     startProcess
-        hudHeader(eventPlayer, "{0}\n{1}".format("{0} : {2}".format(abilityIconString(Hero.WINSTON, Button.ABILITY_1), buttonString(Button.ABILITY_1), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_1)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.MERCY, Button.ABILITY_2), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
-        createEffect(eventPlayer, Effect.RING, Color.WHITE, eventPlayer.getPosition(), 6, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-        effectIDs[eventPlayer.getSlot()].append(getLastCreatedEntity())
-        eventPlayer.setMaxHealth(20 / eventPlayer.getMaxHealth() * 100)
-        eventPlayer.addHealthPool(Health.NORMAL, 180, true, true)
-        commonSub()
-        eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
+            hudHeader(eventPlayer, "{0}\n{1}".format("{0} : {2}".format(abilityIconString(Hero.WINSTON, Button.ABILITY_1), buttonString(Button.ABILITY_1), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_1)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.MERCY, Button.ABILITY_2), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+            hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
+            createEffect(eventPlayer, Effect.RING, Color.WHITE, eventPlayer.getPosition(), 6, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+            effectIDs[eventPlayer.getSlot()].append(getLastCreatedEntity())
+            eventPlayer.setMaxHealth(20 / eventPlayer.getMaxHealth() * 100)
+            eventPlayer.addHealthPool(Health.NORMAL, 180, true, true)
+            commonSub()
+            eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
 
 /*
     Picks up a player.
@@ -46,7 +46,8 @@ rule "Winston Grab":
     
     #Winston's grab is very picky, but once done will make sure the player is on top of him, and hacked to prevent weird ability glitches (or exploits).
     eventPlayer.setAbilityCooldown(Button.ABILITY_2, 3)
-    eventPlayer.setAbilityCooldown(Button.ABILITY_1, 2)
+    if (eventPlayer.getAbilityCooldown(Button.ABILITY_1) < 2):
+        eventPlayer.setAbilityCooldown(Button.ABILITY_1, 2)
     eventPlayer.survivorSpecificVariable = eventPlayer.getPlayerClosestToReticle(Team.2)
     wait(0.1)
     eventPlayer.survivorSpecificVariable.attachTo(eventPlayer, vect(0, 2, 0))

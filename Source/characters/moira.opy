@@ -17,14 +17,14 @@ rule "Moira Spawn":
     commonSpawnConditions
 
     startProcess
-        hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.MOIRA, Button.ABILITY_1), buttonString(Button.ABILITY_1), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_1)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.ZENYATTA, Button.ABILITY_1), buttonString(Button.INTERACT), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.PURPLE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
-        eventPlayer.setMaxHealth(200 / eventPlayer.getMaxHealth() * 100)
-        commonSub()
-        eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
-        createIcon([i for i in eventPlayer if isInLoS(eventPlayer, eventPlayer.getPlayerClosestToReticle(Team.2), BarrierLos.PASS_THROUGH_BARRIERS) == true and eventPlayer.isInViewAngle(eventPlayer.getPlayerClosestToReticle(Team.2), 20) == true and eventPlayer.getPlayerClosestToReticle(Team.2).getHealth() < eventPlayer.getPlayerClosestToReticle(Team.2).getMaxHealth() and eventPlayer.getPlayerClosestToReticle(Team.2).isAlive() == true], eventPlayer.getPlayerClosestToReticle(Team.2), Icon.HEART, IconReeval.VISIBILITY_AND_POSITION, Color.GREEN, false)
-        eventPlayer.survivorSpecificVariable2 = getLastCreatedEntity()
-        effectIDs[eventPlayer.getSlot()].append(getLastCreatedEntity())
+            hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.MOIRA, Button.ABILITY_1), buttonString(Button.ABILITY_1), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_1)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.ZENYATTA, Button.ABILITY_1), buttonString(Button.INTERACT), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.PURPLE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+            hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
+            eventPlayer.setMaxHealth(200 / eventPlayer.getMaxHealth() * 100)
+            commonSub()
+            eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
+            createIcon([i for i in eventPlayer if isInLoS(eventPlayer, eventPlayer.getPlayerClosestToReticle(Team.2), BarrierLos.PASS_THROUGH_BARRIERS) == true and eventPlayer.isInViewAngle(eventPlayer.getPlayerClosestToReticle(Team.2), 20) == true and eventPlayer.getPlayerClosestToReticle(Team.2).getHealth() < eventPlayer.getPlayerClosestToReticle(Team.2).getMaxHealth() and eventPlayer.getPlayerClosestToReticle(Team.2).isAlive() == true], eventPlayer.getPlayerClosestToReticle(Team.2), Icon.HEART, IconReeval.VISIBILITY_AND_POSITION, Color.GREEN, false)
+            eventPlayer.survivorSpecificVariable2 = getLastCreatedEntity()
+            effectIDs[eventPlayer.getSlot()].append(getLastCreatedEntity())
 
 /*
     Moira can no-clip through walls during Fade.

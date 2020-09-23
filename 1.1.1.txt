@@ -2,7 +2,7 @@ settings
 {
     main
     {
-        Description: "Project: Phantom. Survive the nightmare until time runs out! Choose from multiple and unique survivors to help both yourself and your teammates. Version 1.1.0. Created by Block#12425. Discord server: https://discord.gg/CSKSVDH"
+        Description: "Project: Phantom. Survive the nightmare until time runs out! Choose from multiple and unique survivors to help both yourself and your teammates. Version 1.1.1. Created by Block#12425. Discord server: https://discord.gg/CSKSVDH"
     }
     lobby
     {
@@ -18,7 +18,7 @@ settings
         {
             enabled maps
             {
-                Ecopoint: Antarctica
+                Ecopoint: Antarctica Winter
                 Eichenwalde Halloween
                 Necropolis
             }
@@ -236,7 +236,7 @@ rule ("Constant Strings") {
         Set Global Variable(stringCodeLink, Custom String("8MM16", Null, Null, Null));
         Set Global Variable(stringProjectLink, Custom String("workshop.codes/8MM16", Null, Null, Null));
         Set Global Variable(stringDiscordLink, Custom String("discord.gg/CSKSVDH", Null, Null, Null));
-        Set Global Variable(stringVersion, Custom String("1.1.0", Null, Null, Null));
+        Set Global Variable(stringVersion, Custom String("1.1.1", Null, Null, Null));
         Set Global Variable(stringCreator, Custom String("Block#12425", Null, Null, Null));
         Set Global Variable(stringGHDiscordLink, Custom String("grandeurhammers.com", Null, Null, Null));
     }
@@ -334,7 +334,7 @@ rule ("Team 2 Game Start Setup") {
     actions {
         Wait(0.5, Abort When False);
         "Unique fog messages for each map."
-        If(Compare(Current Map, ==, Map(Ecopoint: Antarctica)));
+        If(Compare(Current Map, ==, Map(Ecopoint: Antarctica Winter)));
             Small Message(Event Player, Value In Array(Global.stringArrayFog, True));
         Else If(Compare(Current Map, ==, Map(Necropolis)));
             Small Message(Event Player, Value In Array(Global.stringArrayFog, 2));
@@ -520,13 +520,12 @@ rule ("Brigitte Spawn") {
         If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
             Call Subroutine(playerReset);
             Wait(0.1, Ignore Condition);
-        End;
-        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0} : {1}", Ability Icon String(Hero(Brigitte), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Brigitte), Button(Secondary Fire)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Primary Fire)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Yellow, White, White, Visible To and String, Default Visibility);
-        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
-        Set Max Health(Event Player, Multiply(Divide(20, Max Health(Event Player)), 100));
-        Add Health Pool To Player(Event Player, Health, 180, True, True);
-        Call Subroutine(commonSub);
-        Set Ability Cooldown(Event Player, Button(Ability 1), False);
+            Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0} : {1}", Ability Icon String(Hero(Brigitte), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Brigitte), Button(Secondary Fire)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Primary Fire)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Yellow, White, White, Visible To and String, Default Visibility);
+            Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+            Set Max Health(Event Player, Multiply(Divide(20, Max Health(Event Player)), 100));
+            Add Health Pool To Player(Event Player, Health, 180, True, True);
+            Call Subroutine(commonSub);
+            Set Ability Cooldown(Event Player, Button(Ability 1), False);
     }
 }
 
@@ -578,15 +577,14 @@ rule ("Moira Spawn") {
         If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
             Call Subroutine(playerReset);
             Wait(0.1, Ignore Condition);
-        End;
-        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Moira), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Zenyatta), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Purple, White, White, Visible To and String, Default Visibility);
-        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
-        Set Max Health(Event Player, Multiply(Divide(200, Max Health(Event Player)), 100));
-        Call Subroutine(commonSub);
-        Set Ability Cooldown(Event Player, Button(Ability 1), False);
-        Create Icon(If-Then-Else(And(And(And(Is In Line of Sight(Event Player, Player Closest To Reticle(Event Player, Team 2), Barriers Do Not Block LOS), Is In View Angle(Event Player, Player Closest To Reticle(Event Player, Team 2), 20)), Compare(Health(Player Closest To Reticle(Event Player, Team 2)), <, Max Health(Player Closest To Reticle(Event Player, Team 2)))), Is Alive(Player Closest To Reticle(Event Player, Team 2))), Event Player, Empty Array), Player Closest To Reticle(Event Player, Team 2), Heart, Visible To and Position, Green, False);
-        Set Player Variable(Event Player, survivorSpecificVariable2, Last Created Entity);
-        Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
+            Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Moira), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Zenyatta), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Purple, White, White, Visible To and String, Default Visibility);
+            Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+            Set Max Health(Event Player, Multiply(Divide(200, Max Health(Event Player)), 100));
+            Call Subroutine(commonSub);
+            Set Ability Cooldown(Event Player, Button(Ability 1), False);
+            Create Icon(If-Then-Else(And(And(And(Is In Line of Sight(Event Player, Player Closest To Reticle(Event Player, Team 2), Barriers Do Not Block LOS), Is In View Angle(Event Player, Player Closest To Reticle(Event Player, Team 2), 20)), Compare(Health(Player Closest To Reticle(Event Player, Team 2)), <, Max Health(Player Closest To Reticle(Event Player, Team 2)))), Is Alive(Player Closest To Reticle(Event Player, Team 2))), Event Player, Empty Array), Player Closest To Reticle(Event Player, Team 2), Heart, Visible To and Position, Green, False);
+            Set Player Variable(Event Player, survivorSpecificVariable2, Last Created Entity);
+            Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
     }
 }
 
@@ -665,15 +663,14 @@ rule ("Winston Spawn") {
         If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
             Call Subroutine(playerReset);
             Wait(0.1, Ignore Condition);
-        End;
-        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0} : {1}", Ability Icon String(Hero(Winston), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Mercy), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, White, White, White, Visible To and String, Default Visibility);
-        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
-        Create Effect(Event Player, Ring, White, Position Of(Event Player), 6, Visible To Position and Radius);
-        Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
-        Set Max Health(Event Player, Multiply(Divide(20, Max Health(Event Player)), 100));
-        Add Health Pool To Player(Event Player, Health, 180, True, True);
-        Call Subroutine(commonSub);
-        Set Ability Cooldown(Event Player, Button(Ability 1), False);
+            Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0} : {1}", Ability Icon String(Hero(Winston), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Mercy), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, White, White, White, Visible To and String, Default Visibility);
+            Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+            Create Effect(Event Player, Ring, White, Position Of(Event Player), 6, Visible To Position and Radius);
+            Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
+            Set Max Health(Event Player, Multiply(Divide(20, Max Health(Event Player)), 100));
+            Add Health Pool To Player(Event Player, Health, 180, True, True);
+            Call Subroutine(commonSub);
+            Set Ability Cooldown(Event Player, Button(Ability 1), False);
     }
 }
 
@@ -698,7 +695,9 @@ rule ("Winston Grab") {
     actions {
         "Winston's grab is very picky, but once done will make sure the player is on top of him, and hacked to prevent weird ability glitches (or exploits)."
         Set Ability Cooldown(Event Player, Button(Ability 2), 3);
-        Set Ability Cooldown(Event Player, Button(Ability 1), 2);
+        If(Compare(Ability Cooldown(Event Player, Button(Ability 1)), <, 2));
+            Set Ability Cooldown(Event Player, Button(Ability 1), 2);
+        End;
         Set Player Variable(Event Player, survivorSpecificVariable, Player Closest To Reticle(Event Player, Team 2));
         Wait(0.1, Ignore Condition);
         Attach Players((Event Player).survivorSpecificVariable, Event Player, Vector(False, 2, False));
@@ -804,13 +803,13 @@ rule ("Tracer Spawn") {
         If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
             Call Subroutine(playerReset);
             Wait(0.1, Ignore Condition);
-        End;
-        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Tracer), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Charge(Event Player, Button(Ability 1)), Up), Global.stringCharges, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Tracer), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Orange, White, White, Visible To and String, Default Visibility);
-        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
-        Create Effect(Event Player, Ring, Orange, Position Of(Event Player), 6, Visible To Position and Radius);
-        Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
-        Set Max Health(Event Player, Multiply(Divide(100, Max Health(Event Player)), 100));
-        Call Subroutine(commonSub);
+            Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Tracer), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Charge(Event Player, Button(Ability 1)), Up), Global.stringCharges, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Tracer), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Orange, White, White, Visible To and String, Default Visibility);
+            Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+            Create Effect(Event Player, Ring, Orange, Position Of(Event Player), 6, Visible To Position and Radius);
+            Modify Global Variable At Index(effectIDs, Slot Of(Event Player), Append To Array, Last Created Entity);
+            Set Max Health(Event Player, Multiply(Divide(100, Max Health(Event Player)), 100));
+            Call Subroutine(commonSub);
+            Set Ability Cooldown(Event Player, Button(Ability 2), False);
     }
 }
 
@@ -873,13 +872,12 @@ rule ("Wrecking Ball Spawn") {
         If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
             Call Subroutine(playerReset);
             Wait(0.1, Ignore Condition);
-        End;
-        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Wrecking Ball), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Wrecking Ball), Button(Ultimate)), Custom String("{0}%", Round To Integer(Ultimate Charge Percent(Event Player), Up), Null, Null), Null), Null), Null, Null, Left, False, Turquoise, White, White, Visible To and String, Default Visibility);
-        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
-        Set Max Health(Event Player, Multiply(Divide(50, Max Health(Event Player)), 100));
-        Add Health Pool To Player(Event Player, Health, 150, True, True);
-        Call Subroutine(commonSub);
-        Set Ability Cooldown(Event Player, Button(Ability 2), False);
+            Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Wrecking Ball), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Wrecking Ball), Button(Ultimate)), Custom String("{0}%", Round To Integer(Ultimate Charge Percent(Event Player), Up), Null, Null), Null), Null), Null, Null, Left, False, Turquoise, White, White, Visible To and String, Default Visibility);
+            Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+            Set Max Health(Event Player, Multiply(Divide(50, Max Health(Event Player)), 100));
+            Add Health Pool To Player(Event Player, Health, 150, True, True);
+            Call Subroutine(commonSub);
+            Set Ability Cooldown(Event Player, Button(Ability 2), False);
     }
 }
 
@@ -948,12 +946,11 @@ rule ("Hanzo Spawn") {
         If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
             Call Subroutine(playerReset);
             Wait(0.1, Ignore Condition);
-        End;
-        Start Forcing Player Outlines(Players In Slot(False, Team 1), Event Player, True, Red);
-        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Hanzo), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Hanzo), Button(Jump)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Blue, White, White, Visible To and String, Default Visibility);
-        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
-        Set Max Health(Event Player, Multiply(Divide(200, Max Health(Event Player)), 100));
-        Call Subroutine(commonSub);
+            Start Forcing Player Outlines(Players In Slot(False, Team 1), Event Player, True, Red);
+            Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Hanzo), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 1)), Up), Global.stringSec, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Hanzo), Button(Jump)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Blue, White, White, Visible To and String, Default Visibility);
+            Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+            Set Max Health(Event Player, Multiply(Divide(200, Max Health(Event Player)), 100));
+            Call Subroutine(commonSub);
     }
 }
 
@@ -1052,12 +1049,11 @@ rule ("Symmetra Spawn") {
         If(Or(Compare(Hero Of(Event Player), !=, (Event Player).prevHero), Compare((Event Player).prevHero, ==, Null)));
             Call Subroutine(playerReset);
             Wait(0.1, Ignore Condition);
-        End;
-        Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Symmetra), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Charge(Event Player, Button(Ability 1)), Up), Global.stringCharges, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Symmetra), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Sky Blue, White, White, Visible To and String, Default Visibility);
-        Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
-        Set Max Health(Event Player, Multiply(Divide(20, Max Health(Event Player)), 100));
-        Add Health Pool To Player(Event Player, Health, 180, True, True);
-        Call Subroutine(commonSub);
+            Create HUD Text(Event Player, Custom String("{0}\n{1}", Custom String("{0}: {1}", Ability Icon String(Hero(Symmetra), Button(Ability 1)), Custom String("{0} {1}", Round To Integer(Ability Charge(Event Player, Button(Ability 1)), Up), Global.stringCharges, Null), Null), Custom String("{0}: {1}", Ability Icon String(Hero(Symmetra), Button(Ability 2)), Custom String("{0} {1}", Round To Integer(Ability Cooldown(Event Player, Button(Ability 2)), Up), Global.stringSec, Null), Null), Null), Null, Null, Left, False, Sky Blue, White, White, Visible To and String, Default Visibility);
+            Modify Global Variable At Index(hudIDs, Slot Of(Event Player), Append To Array, Last Text ID);
+            Set Max Health(Event Player, Multiply(Divide(20, Max Health(Event Player)), 100));
+            Add Health Pool To Player(Event Player, Health, 180, True, True);
+            Call Subroutine(commonSub);
     }
 }
 

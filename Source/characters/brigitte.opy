@@ -17,12 +17,12 @@ rule "Brigitte Spawn":
     commonSpawnConditions
 
     startProcess
-        hudHeader(eventPlayer, "{0}\n{1}".format("{0} : {2}".format(abilityIconString(Hero.BRIGITTE, Button.ABILITY_1), buttonString(Button.ABILITY_1), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_1)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.BRIGITTE, Button.SECONDARY_FIRE), buttonString(Button.PRIMARY_FIRE), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.PRIMARY_FIRE)), stringSec))), HudPosition.LEFT, 0, Color.YELLOW, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
-        eventPlayer.setMaxHealth(20 / eventPlayer.getMaxHealth() * 100)
-        eventPlayer.addHealthPool(Health.NORMAL, 180, true, true)
-        commonSub()
-        eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
+            hudHeader(eventPlayer, "{0}\n{1}".format("{0} : {2}".format(abilityIconString(Hero.BRIGITTE, Button.ABILITY_1), buttonString(Button.ABILITY_1), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_1)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.BRIGITTE, Button.SECONDARY_FIRE), buttonString(Button.PRIMARY_FIRE), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.PRIMARY_FIRE)), stringSec))), HudPosition.LEFT, 0, Color.YELLOW, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+            hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
+            eventPlayer.setMaxHealth(20 / eventPlayer.getMaxHealth() * 100)
+            eventPlayer.addHealthPool(Health.NORMAL, 180, true, true)
+            commonSub()
+            eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
 
 /*
     Manually set Shield Bash cooldown.

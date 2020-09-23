@@ -17,12 +17,12 @@ rule "Wrecking Ball Spawn":
     commonSpawnConditions
 
     startProcess
-        hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_2), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.HAMMOND, Button.ULTIMATE), null, "{0}%".format(ceil(eventPlayer.getUltCharge())))), HudPosition.LEFT, 0, Color.TURQUOISE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
-        eventPlayer.setMaxHealth(50 / eventPlayer.getMaxHealth() * 100)
-        eventPlayer.addHealthPool(Health.NORMAL, 150, true, true)
-        commonSub()
-        eventPlayer.setAbilityCooldown(Button.ABILITY_2,0)
+            hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_2), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.HAMMOND, Button.ULTIMATE), null, "{0}%".format(ceil(eventPlayer.getUltCharge())))), HudPosition.LEFT, 0, Color.TURQUOISE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+            hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
+            eventPlayer.setMaxHealth(50 / eventPlayer.getMaxHealth() * 100)
+            eventPlayer.addHealthPool(Health.NORMAL, 150, true, true)
+            commonSub()
+            eventPlayer.setAbilityCooldown(Button.ABILITY_2,0)
 
 /*
     Wrecking Ball uses his force field to push the monster back, regardless of ability.
