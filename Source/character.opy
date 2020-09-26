@@ -57,7 +57,7 @@ rule "Team 2 Game Start Setup":
     wait(0.5, Wait.ABORT_WHEN_FALSE)
     
     #Unique fog messages for each map.
-    if getCurrentMap() == Map.ECOPOINT_ANTARCTICA_WINTER:
+    if getCurrentMap() == Map.ECOPOINT_ANTARCTICA:
         smallMessage(eventPlayer, stringArrayFog[1])
     elif getCurrentMap() == Map.NECROPOLIS:
         smallMessage(eventPlayer, stringArrayFog[2])
