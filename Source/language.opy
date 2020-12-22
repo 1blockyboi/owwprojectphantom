@@ -1,3 +1,5 @@
+#!mainFile "main.opy"
+
 #Global variables
 
 globalvar stringVersion 
@@ -22,7 +24,7 @@ globalvar stringShowInfo
 globalvar stringHanzoTitle 
 globalvar stringHanzoAbility1 
 globalvar stringHanzoAbility2 
-globalvar stringHanzoPassive 
+globalvar stringHanzoPassive
 globalvar stringBrigTitle 
 globalvar stringBrigAbility1 
 globalvar stringBrigAbility2 
@@ -45,7 +47,7 @@ globalvar stringReaperAbility5
 globalvar stringTracerPassive 
 globalvar stringWinstonTitle 
 globalvar stringWinstonAbility1 
-globalvar stringWinstonAbility2 
+globalvar stringWinstonAbility2
 globalvar stringTracerTeleportMessage 
 globalvar stringTeamKill 
 globalvar stringWinstonGrab 
@@ -66,6 +68,9 @@ globalvar stringWaitingGame
 globalvar stringGH
 globalvar stringGHDiscord 
 globalvar stringGHDiscordLink
+globalvar stringReaperHit
+globalvar stringTip2
+globalvar stringInvalidPosition
 
 #Subroutine names
 
@@ -75,7 +80,7 @@ rule "Constant Strings":
     stringCodeLink = "8MM16"
     stringProjectLink = "workshop.codes/8MM16"
     stringDiscordLink = "discord.gg/CSKSVDH"
-    stringVersion = "1.1.2"
+    stringVersion = "1.2.0"
     stringCreator = "Block#12425"
     stringGHDiscordLink = "grandeurhammers.com"
 
@@ -93,10 +98,10 @@ rule "Determine Language (English)":
     stringMoiraAbility2 = "Heal an injured teammate for 1 HP. Does not work on Tracer."
     stringHideInfo = "Hide Info."
     stringShowInfo = "Show info"
-    stringHanzoTitle = "Hanzo, the recon expert."
-    stringHanzoAbility1 = "Equip a sonic dart that can reveal the Phantoms in the area."
+    stringHanzoTitle = "Hanzo, the eagle-eye."
+    stringHanzoAbility1 = "Leap in the air."
     stringHanzoAbility2 = "Climb up walls."
-    stringHanzoPassive = "Passive: Can see the Phantoms' outlines through the fog."
+    stringHanzoPassive = "Passive: Less Fog. Pings the Phantom and tracks it when he sees it."
     stringBrigTitle = "Brigitte, the frontline resistance."
     stringBrigAbility1 = "Use flail to throw the Phantom back."
     stringBrigAbility2 = "Bash and stun with the shield! Requires primary fire to use.\nDoes not block damage."
@@ -126,12 +131,13 @@ rule "Determine Language (English)":
     stringTeamKill = "Nice job, you killed a teammate. Now you're dead."
     stringWinstonGrab = "I have picked you up! I can throw you far distances for your safety!"
     stringTimeRemaining = "Time Remaining"
-    stringObjectiveSurvivors = "Survive the night until time runs out!"
+    stringObjectiveSurvivors = "Survive until time runs out!"
     stringObjectiveReaper = "Kill all the mortals before time runs out!"
     stringReaperTeleport = "Finish Teleporting"
     stringReaperTeleportGhost = "Spawn a ghost"
     stringLateJoin = "Joined mid-match. Please wait until next match!"
-    stringTip = "Tip: Only one REAL Phantom exists."
+    stringTip = "Tip: Only one REAL Phantom exists. Hanzo pings phantoms."
+    stringTip2 = "Tip: Wrecking Ball's mines can be deactivated with melee."
     stringReaperTeleportSpawn = "You think you can hide..."
     stringArrayFog = ["A ghostly fog settles in...", "A snow storm forms...", "A dust storm rolls in..."]
     stringWinstonRide = "Hop off of Winston"
@@ -142,4 +148,6 @@ rule "Determine Language (English)":
     stringMoiraPassive = "Passive: You can see teammates in the fog & their health status."
     stringGH = "{0} Certified by Grandeur Hammers".format(abilityIconString(Hero.TORBJORN, Button.ABILITY_2))
     stringGHDiscord = "{0}".format(stringGHDiscordLink)
+    stringReaperHit = "Successful hit! Recharging..."
+    stringInvalidPosition = "Teleported into an invalid position!"
     #Right now just executes English since no other languages are available

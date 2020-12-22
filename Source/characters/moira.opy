@@ -1,3 +1,5 @@
+#!mainFile "../main.opy"
+
 #!include "character.opy"
 
 /*
@@ -23,8 +25,7 @@ rule "Moira Spawn":
             commonSub()
             eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
             createIcon([i for i in eventPlayer if isInLoS(eventPlayer, eventPlayer.getPlayerClosestToReticle(Team.2), BarrierLos.PASS_THROUGH_BARRIERS) == true and eventPlayer.isInViewAngle(eventPlayer.getPlayerClosestToReticle(Team.2), 20) == true and eventPlayer.getPlayerClosestToReticle(Team.2).getHealth() < eventPlayer.getPlayerClosestToReticle(Team.2).getMaxHealth() and eventPlayer.getPlayerClosestToReticle(Team.2).isAlive() == true], eventPlayer.getPlayerClosestToReticle(Team.2), Icon.HEART, IconReeval.VISIBILITY_AND_POSITION, Color.GREEN, false)
-            eventPlayer.survivorSpecificVariable2 = getLastCreatedEntity()
-            effectIDs[eventPlayer.getSlot()].append(getLastCreatedEntity())
+            iconIDs[eventPlayer.getSlot()].append(getLastCreatedEntity())
 
 /*
     Moira can no-clip through walls during Fade.
@@ -36,7 +37,7 @@ rule "Moira Clipping I":
     @Condition eventPlayer.isUsingAbility1() == true
     
     #Like Reaper, Moira can no clip too, but to prevent exploits she is also teleported to NWP when she is done, to prevent hiding outside the map or in the environment.
-    disableEnvironmentCollision(eventPlayer, false)
+    eventPlayer.disableEnvironmentCollision(false)
 
 /*
     Clipping is restored after Fade ends, and teleports to NWP to prevent exploits.
@@ -62,7 +63,7 @@ rule "Moira Healing":
     @Condition isInLoS(eventPlayer, eventPlayer.getPlayerClosestToReticle(Team.2), BarrierLos.PASS_THROUGH_BARRIERS) == true
     @Condition eventPlayer.isInViewAngle(eventPlayer.getPlayerClosestToReticle(Team.2), 20) == true
     @Condition eventPlayer.isHoldingButton(Button.ABILITY_2) == true
-    @Condition eventPlayer.getPlayerClosestToReticle(Team.2).getHealth() < eventPlayer.getPlayerClosestToReticle(Team.2).getMaxHealth()
+    @Condition eventPlayer.getPlayerClosestToReticle(Team.2).getHealth() < eventPlayer.getPlayerClosestToReticle(Team.2).getMaxHealth() - 20
     @Condition eventPlayer.getPlayerClosestToReticle(Team.2).isAlive() == true
     @Condition eventPlayer.isAlive() == true
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_2) == 0

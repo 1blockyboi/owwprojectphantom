@@ -1,3 +1,5 @@
+#!mainFile "../main.opy"
+
 #!include "character.opy"
 
 /*
@@ -19,7 +21,7 @@ rule "Winston Spawn":
     startProcess
             hudHeader(eventPlayer, "{0}\n{1}".format("{0} : {2}".format(abilityIconString(Hero.WINSTON, Button.ABILITY_1), buttonString(Button.ABILITY_1), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_1)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.MERCY, Button.ABILITY_2), null, "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
             hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
-            createEffect(eventPlayer, Effect.RING, Color.WHITE, eventPlayer.getPosition(), 6, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+            createEffect(eventPlayer, Effect.RING, Color.WHITE, updateEveryTick(eventPlayer.getPosition()), 6, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
             effectIDs[eventPlayer.getSlot()].append(getLastCreatedEntity())
             eventPlayer.setMaxHealth(20 / eventPlayer.getMaxHealth() * 100)
             eventPlayer.addHealthPool(Health.NORMAL, 180, true, true)
@@ -45,11 +47,12 @@ rule "Winston Grab":
     @Condition distance(eventPlayer, eventPlayer.getPlayerClosestToReticle(Team.2)) <= 6
     
     #Winston's grab is very picky, but once done will make sure the player is on top of him, and hacked to prevent weird ability glitches (or exploits).
-    eventPlayer.setAbilityCooldown(Button.ABILITY_2, 3)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_2, 2)
     if (eventPlayer.getAbilityCooldown(Button.ABILITY_1) < 2):
         eventPlayer.setAbilityCooldown(Button.ABILITY_1, 2)
     eventPlayer.survivorSpecificVariable = eventPlayer.getPlayerClosestToReticle(Team.2)
     wait(0.1)
+    eventPlayer.survivorSpecificVariable.throwingPlayer = eventPlayer
     eventPlayer.survivorSpecificVariable.attachTo(eventPlayer, vect(0, 2, 0))
     eventPlayer.survivorSpecificVariable.winstonGrab = true
     eventPlayer.survivorSpecificVariable.setStatusEffect(null, Status.HACKED, 9999)
@@ -106,6 +109,7 @@ rule "Winston Player Escape":
     
     #Not everyone wants to be captive to Winston, or trolled. This exists to allow them to escape. Since there is a cooldown for the grab, this should be enough for them to get away from a troll.
     eventPlayer.survivorSpecificVariable.detach()
+    eventPlayer.survivorSpecificVariable.throwingPlayer = null
     eventPlayer.survivorSpecificVariable.winstonGrab = false
     eventPlayer.survivorSpecificVariable.clearStatusEffect(Status.HACKED)
     eventPlayer.survivorSpecificVariable = null

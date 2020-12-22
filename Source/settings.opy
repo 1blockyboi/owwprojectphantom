@@ -1,8 +1,10 @@
+#!mainFile "main.opy"
+
 /* Lobby Settings for mode */
 
 settings {
     "main": {
-        "description": "Project: Phantom. Survive the nightmare until time runs out! Choose from multiple and unique survivors to help both yourself and your teammates. Version 1.1.2. Created by Block#12425. Discord server: https://discord.gg/CSKSVDH"
+        "description": "Project: Phantom. Survive the nightmare until time runs out! Choose from multiple and unique survivors to help both yourself and your teammates. Version 1.2.0. Created by Block#12425. Discord server: https://discord.gg/CSKSVDH"
     },
     "lobby": {
         "allowPlayersInQueue": true,
@@ -21,6 +23,7 @@ settings {
         },
         "general": {
             "heroLimit": "2PerTeam",
+            "enableSelfInitiatedRespawn": false,
             "enableSkins": false,
             "spawnHealthPacks": "disabled"
         }
@@ -28,12 +31,20 @@ settings {
     "heroes": {
         "team1": {
             "reaper": {
-                "movementSpeed%": 110,
                 "damageDealt%": 500,
                 "damageReceived%": 10,
+                "movementSpeed%": 110,
                 "enablePrimaryFire": false,
                 "enableAbility2": false,
                 "enableUlt": false
+            },
+            "widowmaker": {
+                "enableAbility1": false,
+                "enableInfiniteUlt": true,
+                "enablePrimaryFire": false,
+                "enableMelee": false,
+                "enableSpawningWithUlt": true,
+                "enableAbility2": false
             },
             "enabledHeroes": [
                 "reaper"
@@ -50,7 +61,7 @@ settings {
                 "ability1Kb%": 150
             },
             "hanzo": {
-                "enableAbility3": false,
+                "enableAbility1": false,
                 "enablePrimaryFire": false,
                 "enableAbility2": false,
                 "enableUlt": false
@@ -95,6 +106,14 @@ settings {
                 "passiveUltGen%": 500,
                 "ultGen%": 100
             },
+            "zenyatta": {
+                "enableAbility2": false,
+                "enablePrimaryFire": false,
+                "enableMelee": false,
+                "enableSecondaryFire": false,
+                "enableSpawningWithUlt": true,
+                "passiveUltGen%": 500
+            },
             "enabledHeroes": [
                 "brigitte",
                 "hanzo",
@@ -108,5 +127,16 @@ settings {
                 "enableMelee": false
             }
         },
+        "allTeams": {
+            "widowmaker": {
+                "enableAbility1": false,
+                "enableInfiniteUlt": true,
+                "enablePrimaryFire": false,
+                "enableMelee": false,
+                "enableSpawningWithUlt": true,
+                "enableAbility2": false
+            }
+        }
     }
 }
+

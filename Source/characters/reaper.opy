@@ -1,3 +1,5 @@
+#!mainFile "../main.opy"
+
 #!include "character.opy"
 
 /*
@@ -33,17 +35,19 @@ rule "Reaper Setup":
     @Hero reaper
     
     eventPlayer.startModifyingVoicelinePitch(-20, true)
+    getPlayers(Team.2).stopForcingOutlineFor(eventPlayer)
+    getPlayers(Team.2).enableNameplatesFor(eventPlayer)
     eventPlayer.setAbility2Enabled(false)
     eventPlayer.setPrimaryFireEnabled(false)
     eventPlayer.startScalingSize(1.3, true)
     startDamageModification(eventPlayer, getPlayers(Team.2), 1, DamageReeval.RECEIVERS_DAMAGERS_AND_DMGPERCENT)
     eventPlayer.disableHeroHUD()
-    eventPlayer.setRespawnTime(0.5)
     eventPlayer.startHoT(eventPlayer, 9999, 1000)
     eventPlayer.survivorSpecificVariable5 = vect(0,0,0)
     #There is a position always tracked for the orb cursor. Since only the player needs to see it, this only runs for the player.
     if eventPlayer.isDummy() == false:
-        chase(eventPlayer.survivorSpecificVariable5, raycast(getPlayersInSlot(0, Team.1).getEyePosition(), getPlayersInSlot(0, Team.1).getFacingDirection() * 1000 + getPlayersInSlot(0, Team.1).getEyePosition(), null, getAllPlayers(), false).getHitPosition(), rate=10000, ChaseReeval.DESTINATION_AND_RATE)
+        createDummy(Hero.WIDOWMAKER, Team.1, 1, eventPlayer.getPosition(), vect(0,0,0))
+    #!define lookPosition  updateEveryTick(raycast(getPlayersInSlot(0, Team.1).getEyePosition(), getPlayersInSlot(0, Team.1).getFacingDirection() * 1000 + getPlayersInSlot(0, Team.1).getEyePosition(), null, getAllPlayers(), false).getHitPosition())
 
 /*
         Creates the HUD and effects for Reaper. Since Reaper is the only monster, and only one player plays as the Reaper, these are created globally and are hardcoded for players in slot 0.
@@ -55,12 +59,13 @@ rule "Reaper HUD and Effects":
     hudHeader(getPlayersInSlot(0, Team.1), "{0}: ∞".format(abilityIconString(Hero.REAPER, Button.MELEE)), HudPosition.LEFT, 1.6, Color.PURPLE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudHeader(getPlayersInSlot(0, Team.1), "{0}: {1} {2}".format(abilityIconString(Hero.ECHO, Button.ULTIMATE), ceil(getPlayersInSlot(0, Team.1).decoyCD), stringSec), HudPosition.LEFT, 1.3, Color.PURPLE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudHeader(getPlayersInSlot(0, Team.1), "{0}: {1} {2}".format(iconString(Icon.RECYCLE), ceil(getPlayersInSlot(0, Team.1).decoySwapCD), stringSec), HudPosition.LEFT, 1.4, Color.PURPLE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-    createEffect([i for i in getPlayersInSlot(0, Team.1) if getPlayersInSlot(0, Team.1).isRising == false], Effect.ORB, Color.PURPLE, getPlayersInSlot(0, Team.1).survivorSpecificVariable5, 2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-    createInWorldText([i for i in getPlayersInSlot(0, Team.1) if getPlayersInSlot(0, Team.1).isTeleporting == false], buttonString(Button.SECONDARY_FIRE), getPlayersInSlot(0, Team.1).survivorSpecificVariable5, 1, Clip.SURFACES, WorldTextReeval.VISIBILITY_POSITION_AND_STRING, Color.WHITE, SpecVisibility.DEFAULT)
-    createInWorldText([i for i in getPlayersInSlot(0, Team.1) if getPlayersInSlot(0, Team.1).isRising == false and getPlayersInSlot(0, Team.1).isTeleporting == true], "{0} {1} | {2}".format(stringReaperTeleport, buttonString(Button.PRIMARY_FIRE), "{0} {1}".format(buttonString(Button.SECONDARY_FIRE), stringReaperTeleportGhost)), getPlayersInSlot(0, Team.1).survivorSpecificVariable5, 1, Clip.NONE, WorldTextReeval.VISIBILITY_POSITION_AND_STRING, Color.WHITE, SpecVisibility.DEFAULT)
+    createEffect([i for i in getPlayersInSlot(0, Team.1) if getPlayersInSlot(0, Team.1).isRising == false], Effect.ORB, Color.GRAY, lookPosition, 2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createInWorldText([i for i in getPlayersInSlot(0, Team.1) if getPlayersInSlot(0, Team.1).isTeleporting == false], buttonString(Button.SECONDARY_FIRE), lookPosition, 1, Clip.SURFACES, WorldTextReeval.VISIBILITY_POSITION_AND_STRING, Color.WHITE, SpecVisibility.DEFAULT)
+    createInWorldText([i for i in getPlayersInSlot(0, Team.1) if getPlayersInSlot(0, Team.1).isRising == false and getPlayersInSlot(0, Team.1).isTeleporting == true], "{0} {1} | {2}".format(stringReaperTeleport, buttonString(Button.PRIMARY_FIRE), "{0} {1}".format(buttonString(Button.SECONDARY_FIRE), stringReaperTeleportGhost)), lookPosition, 1, Clip.NONE, WorldTextReeval.VISIBILITY_POSITION_AND_STRING, Color.WHITE, SpecVisibility.DEFAULT)
     hudSubtext([i for i in getPlayersInSlot(0, Team.1) if getPlayersInSlot(0, Team.1).hideInfo == false], " \n{0}\n\n{1}".format(stringReaperTitle, "{0}\n{1}".format("{0} {1}: {2}".format(abilityIconString(Hero.REAPER, Button.ABILITY_1), buttonString(Button.ABILITY_1), stringReaperAbility1), "{0} {1}: {2}".format(abilityIconString(Hero.REAPER, Button.ABILITY_2), buttonString(Button.ABILITY_2), stringReaperAbility2))), HudPosition.LEFT, 1.8, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext([i for i in getPlayersInSlot(0, Team.1) if getPlayersInSlot(0, Team.1).hideInfo == false], "{0}\n{1}".format("{0} {1}: {2}".format(abilityIconString(Hero.ECHO, Button.ULTIMATE), buttonString(Button.SECONDARY_FIRE), stringReaperAbility3), "{0} {1}: {2}".format(iconString(Icon.RECYCLE), buttonString(Button.ULTIMATE), stringReaperAbility4)), HudPosition.LEFT, 1.81, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext([i for i in getPlayersInSlot(0, Team.1) if getPlayersInSlot(0, Team.1).hideInfo == false], "{0} {1}: {2}".format(abilityIconString(Hero.REAPER, Button.MELEE), buttonString(Button.MELEE), stringReaperAbility5), HudPosition.LEFT, 1.82, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+
 
 /*
     Since the set up for Reaper is handled in a separate rule, this spawn rule just makes sure some variables and cooldowns are properly adjusted.
@@ -79,7 +84,7 @@ rule "Reaper Spawn":
 /*
     This makes sure Reaper does not get stuck in a state while messing around during Waiting for Game...
 */
-rule "Block#12425 - Reaper Cleanup Before Game Start":
+rule "Reaper Cleanup Before Game Start":
     @Condition isAssemblingHeroes() == true
     
     #This cleans up the dummy bots Reaper was using before the match and teleportation variables.
@@ -95,6 +100,7 @@ rule "Block#12425 - Reaper Cleanup Before Game Start":
     getPlayersInSlot(0, Team.1).setAbility1Enabled(true)
     getPlayersInSlot(0, Team.1).setMeleeEnabled(true)
     getPlayersInSlot(0, Team.1).setAbilityCooldown(Button.ABILITY_2, 7)
+    getPlayersInSlot(0, Team.1).setInvisibility(Invis.NONE)
 
 /*
     The first rule for teleport. This is executed by the player only.
@@ -117,17 +123,17 @@ rule "Teleport (Start Teleport)":
     #The beginning of Reaper's unique teleport.
     eventPlayer.setAbilityCooldown(Button.ABILITY_2, 2)
     wait(0.1)
-    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.PURPLE, eventPlayer.getPosition(), 3)
+    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.BLACK, eventPlayer.getPosition(), 3)
     eventPlayer.setAbility1Enabled(false)
     eventPlayer.setMeleeEnabled(false)
     eventPlayer.setInvisibility(Invis.ALL)
     eventPlayer.setStatusEffect(null, Status.PHASED_OUT, 9999)
-    disableEnvironmentCollision(eventPlayer, true)
+    eventPlayer.disableEnvironmentCollision(true)
     eventPlayer.startForcingPosition(eventPlayer.currentTeleportPosition, true)
     eventPlayer.isTeleporting = true
     eventPlayer.currentTeleportPosition = eventPlayer.getPosition()
     eventPlayer.teleportDestination = eventPlayer.getPosition()
-    chase(eventPlayer.currentTeleportPosition, eventPlayer.teleportDestination, rate=5*distance(eventPlayer.teleportDestination, eventPlayer.currentTeleportPosition), ChaseReeval.DESTINATION_AND_RATE)
+    chase(eventPlayer.currentTeleportPosition, updateEveryTick(eventPlayer.teleportDestination), rate=5*distance(eventPlayer.teleportDestination, eventPlayer.currentTeleportPosition), ChaseReeval.DESTINATION_AND_RATE)
 
 /*
     Second part of the teleport. This animation is also used for dummy bot spawn (which has another rule executed to set up the rule properly)
@@ -145,7 +151,7 @@ rule "Teleport (Rise from Ground)":
     #eventPlayer.theGround = raycast(eventPlayer.getEyePosition(), eventPlayer.getFacingDirection() * 1000 + eventPlayer.getEyePosition(), null, eventPlayer, false).getHitPosition()
     #This check is applied due to an exploit on Eichenwalde.
     eventPlayer.theGround = raycast(eventPlayer.getEyePosition(), eventPlayer.getFacingDirection() * 1000 + eventPlayer.getEyePosition(), null, eventPlayer, false).getHitPosition()
-    disableEnvironmentCollision(eventPlayer, true)
+    eventPlayer.disableEnvironmentCollision(true)
     eventPlayer.underTheGround = eventPlayer.theGround + vect(0, -4, 0)
     eventPlayer.currentTeleportPosition = eventPlayer.underTheGround
     chase(eventPlayer.currentTeleportPosition, eventPlayer.theGround, rate=2, ChaseReeval.DESTINATION_AND_RATE)
@@ -177,9 +183,11 @@ rule "Teleport (Clean up Teleport)":
     eventPlayer.setAbilityCooldown(Button.ABILITY_2, 7)
     #This is to prevent out of bounds teleports. The game waits 0.2 sec to ensure that the out of bounds is really out of bounds.
     wait(1)
-    if distance(nearestWalkablePosition(eventPlayer.getPosition()), eventPlayer.getPosition()) >= 2 and eventPlayer.isDummy() == false:
+    if distance(nearestWalkablePosition(eventPlayer.getPosition()), eventPlayer.getPosition()) >= 5 and eventPlayer.isDummy() == false:
         eventPlayer.teleport(nearestWalkablePosition(eventPlayer.getPosition()))
-        playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.PURPLE, eventPlayer.getPosition(), 3)
+        playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.BLACK, eventPlayer.getPosition(), 3)
+        eventPlayer.setStatusEffect(null, Status.STUNNED, 2)
+        smallMessage(eventPlayer, stringInvalidPosition)
 
 /*
     When teleporting, this rule loops while movement keys are being pressed. This ensures smooth movement.
@@ -197,7 +205,7 @@ rule "Move Player During Teleport":
             eventPlayer.teleportDestination += vect(0, 0.7, 0)
         if eventPlayer.isHoldingButton(Button.CROUCH) == true:
             eventPlayer.teleportDestination += vect(0, -0.7, 0)
-        wait(0.04)
+        wait(0.05)
         if RULE_CONDITION:
             goto RULE_START
 
@@ -212,9 +220,9 @@ rule "Wraith (Setup No Clip)":
     @Condition eventPlayer.isUsingAbility1() == true
     
     #With wraith form Reaper can no clip through walls.
-    disableEnvironmentCollision(eventPlayer, false)
+    eventPlayer.disableEnvironmentCollision(false)
     eventPlayer.setMeleeEnabled(false)
-    eventPlayer.setMoveSpeed(78.889)
+    eventPlayer.setMoveSpeed(80)
 
 /*
     When wraith is over, ability cooldown is manually set in case of balancing patches. Collision with walls is enabled.
@@ -231,7 +239,7 @@ rule "Wraith (Disable Clipping)":
     eventPlayer.setAbilityCooldown(Button.ABILITY_1, 12)
     #This is to fix wraith abuse. A technique used is to wraith to get the speed-boost, then while reverting, the player is given a window of opportunity to melee while still be invincible.
     #This wait prevents that.
-    wait(0.1)
+    wait(0.3)
     eventPlayer.setMeleeEnabled(true)
     
 /*
@@ -265,17 +273,19 @@ rule "Ghost Setup (Dummy Bot Setup)":
     eventPlayer.isTeleporting = true
     eventPlayer.startForcingThrottle(1, 1, 0, 1, 0, 1)
     #The following rules are to get it read for the Rise from Ground rule.
-    disableEnvironmentCollision(eventPlayer, true)
+    eventPlayer.disableEnvironmentCollision(true)
     eventPlayer.currentTeleportPosition = eventPlayer.getPosition()
     eventPlayer.theGround = eventPlayer.getPosition() + vect(0, 4, 0)
     eventPlayer.startForcingPosition(eventPlayer.currentTeleportPosition, true)
     wait(1)
+    eventPlayer.startForcingOutlineFor(getPlayers(Team.2), false, Color.WHITE)
+    eventPlayer.disableNameplatesFor(getAllPlayers())
     chase(eventPlayer.currentTeleportPosition, eventPlayer.theGround, rate=2, ChaseReeval.DESTINATION_AND_RATE)
     eventPlayer.isRising = true
     #Before the ghost fully emerges and is fully spawned, effects are set up.
     wait(0.5)
     eventPlayer.setStatusEffect(null, Status.PHASED_OUT, 9999)
-    disableEnvironmentCollision(eventPlayer, false)
+    eventPlayer.disableEnvironmentCollision(false)
     eventPlayer.startForcingOutlineFor(getPlayers(Team.1), true, Color.PURPLE)
     eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
 
@@ -335,7 +345,9 @@ rule "Ghost Chase":
     @Condition eventPlayer.getCurrentHero() == Hero.REAPER
     
     #This is here to scare the player into reacting.
-    eventPlayer.forceButtonPress(Button.ABILITY_1)
+    eventPlayer.startForcingButton(Button.ABILITY_1)
+    wait()
+    eventPlayer.stopForcingButton(Button.ABILITY_1)
     eventPlayer.setFacing(directionTowards(eventPlayer, eventPlayer.getPlayerClosestToReticle(Team.2)), Relativity.TO_WORLD)
     #This is here to provide info for decoy swap. If the decoy sees a player and starts chasing, the Reaper may want to swap position and confuse the survivor, or take advantage of them not reacting.
     smallMessage(getPlayersInSlot(0, Team.1), "{0} {1}: {2}".format(heroIcon(Hero.REAPER), stringGhost, stringChase))
@@ -353,7 +365,7 @@ rule "Restore No-Clip after Rising":
     @Condition eventPlayer.isUsingAbility1() == false
     
     #The decoy is always no clipped. It is both easier for it to roam and also a sign for survivors to note.
-    disableEnvironmentCollision(eventPlayer, false)
+    eventPlayer.disableEnvironmentCollision(false)
     eventPlayer.setStatusEffect(null, Status.PHASED_OUT, 9999)
 
 /*
@@ -408,7 +420,9 @@ rule "Reaper Melee on Primary Fire":
     @Condition eventPlayer.isTeleporting == false
     
     #As a community request, the melee can also be done on primary fire (though the game will still refer for the melee button in the info).
-    eventPlayer.forceButtonPress(Button.MELEE)
+    eventPlayer.startForcingButton(Button.MELEE)
+    wait()
+    eventPlayer.stopForcingButton(Button.MELEE)
 
 /*
     If Reaper lands a hit, he is stunned. This is to give time for the survivor to reposition.
@@ -421,4 +435,11 @@ rule "Reaper Melee Stun":
     
     #If Reaper lands a hit, he is stunned to give the victim time to reposition.
     eventPlayer.setStatusEffect(null, Status.STUNNED, 3)
-    smallMessage(eventPlayer, "Successful hit! Recharging...")
+    smallMessage(eventPlayer, stringReaperHit)
+
+rule "Reaper died":
+    @Event playerDied
+    @Team 1
+    @Hero reaper
+    
+    playEffect(getAllPlayers, DynamicEffect.BAD_EXPLOSION, Color.BLACK, eventPlayer.getPosition(), 3)

@@ -1,3 +1,5 @@
+#!mainFile "../main.opy"
+
 #!include "character.opy"
 
 #This was written before the player variables were reworked.
@@ -20,10 +22,18 @@ rule "Hanzo Spawn":
     commonSpawnConditions 
 
     startProcess
-            getPlayersInSlot(0, Team.1).startForcingOutlineFor(eventPlayer, true, Color.RED)
-            hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.HANZO, Button.ABILITY_1), buttonString(Button.ABILITY_1), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_1)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.HANZO, Button.JUMP), buttonString(Button.JUMP), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.BLUE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+            eventPlayer.survivorSpecificVariable3 = []
+            hudHeader(eventPlayer, "{0}\n{1}".format("{0}: {2}".format(abilityIconString(Hero.WINSTON, Button.ABILITY_1), buttonString(Button.ABILITY_1), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.JUMP)), stringSec)), "{0}: {2}".format(abilityIconString(Hero.HANZO, Button.JUMP), buttonString(Button.JUMP), "{0} {1}".format(ceil(eventPlayer.getAbilityCooldown(Button.ABILITY_2)), stringSec))), HudPosition.LEFT, 0, Color.BLUE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
             hudIDs[eventPlayer.getSlot()].append(getLastCreatedText())
+            createIcon([i for i in getPlayers(Team.2) if entityExists(getPlayersInSlot(0, Team.1)) and isInLoS(eventPlayer, getPlayersInSlot(0, Team.1), BarrierLos.PASS_THROUGH_BARRIERS) and eventPlayer.isInViewAngle(getPlayersInSlot(0, Team.1), 105) and distance(eventPlayer, getPlayersInSlot(0, Team.1)) <= fogDistance + 10 and eventPlayer.isAlive() and getPlayersInSlot(0, Team.1).isAlive() and getPlayersInSlot(0, Team.1).survivorSpecificVariable[0] == false],getPlayersInSlot(0, Team.1), Icon.EYE, IconReeval.VISIBILITY_AND_POSITION, Color.RED, true)
+            iconIDs[eventPlayer.getSlot()].append(getLastCreatedEntity())
+            createIcon([i for i in getPlayers(Team.2) if entityExists(getPlayersInSlot(2, Team.1)) and isInLoS(eventPlayer, getPlayersInSlot(2, Team.1), BarrierLos.PASS_THROUGH_BARRIERS) and eventPlayer.isInViewAngle(getPlayersInSlot(2, Team.1), 105) and distance(eventPlayer, getPlayersInSlot(2, Team.1)) <= fogDistance + 10 and eventPlayer.isAlive() and getPlayersInSlot(2, Team.1).isAlive() and getPlayersInSlot(2, Team.1).survivorSpecificVariable[0] == false],getPlayersInSlot(2, Team.1), Icon.EYE, IconReeval.VISIBILITY_AND_POSITION, Color.RED, true)
+            iconIDs[eventPlayer.getSlot()].append(getLastCreatedEntity())
             eventPlayer.setMaxHealth(200 / eventPlayer.getMaxHealth() * 100)
+            fogCreate(fogDistance + 10)
+            fogCreate(fogDistance + 11)
+            fogCreate(fogDistance + 12)
+            fogCreate((fogDistance + 10) * -1)
             commonSub()
 
 /*
@@ -67,24 +77,12 @@ rule "Hanzo Wall Climb Prevention":
     eventPlayer.setStatusEffect(null, Status.HACKED, 0.2)
 
 /*
-    Every time Reaper spawns a ghost, it's outline is fixed so Hanzo can see it too.
+    Hanzo Leap Cooldown is manually set
 */
-rule "Hanzo Reaper Ghost Outline Refresh":
+rule "Hanzo Leap Cooldown":
     @Event eachPlayer
     @Team 2
     @Hero hanzo
-    @Condition getPlayersInSlot(2, Team.1).survivorSpecificVariable[1] == true
-
-    getPlayersInSlot(2, Team.1).startForcingOutlineFor(eventPlayer, true, Color.RED)
-
-/*
-    Hanzo Sonic Arrow Cooldown is manually set
-*/
-rule "Hanzo Sonic Arrow Cooldown":
-    @Event eachPlayer
-    @Team 2
-    @Hero hanzo
-    @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_1) > 0
-
+    @Condition eventPlayer.getAbilityCooldown(Button.JUMP) > 0
     #To counter balancing patches.
-    eventPlayer.setAbilityCooldown(Button.ABILITY_1, 9)
+    eventPlayer.setAbilityCooldown(Button.JUMP, 5)

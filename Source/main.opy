@@ -7,14 +7,18 @@
 #!include "characters/hanzo.opy"
 #!include "characters/symmetra.opy"
 #!include "characters/reaper.opy"
+#!include "characters/widow.opy"
 #!include "settings.opy"
+
 
 #Global variables
 globalvar gracePeriod 
 globalvar matchTimeMin 
-globalvar matchTimeSec 
+globalvar matchTimeSec
+globalvar constantMatchTime
 globalvar debugMode 
 globalvar tipsEnabled
+globalvar dynMatchTime
 
 #Subroutine names
 subroutine debugMode
@@ -34,11 +38,14 @@ rule "Initial Setup (Global Setup)":
     matchTimeMin = createWorkshopSetting(int<1:20>, "Time", "Minutes", 4)
     matchTimeSec = createWorkshopSetting(int<0:59>, "Time", "Seconds", 30)
     debugMode = createWorkshopSetting(bool, "Debug Mode", "Enabled", false)
+    constantMatchTime = createWorkshopSetting(bool, "Time", "Dynamic Match Time", true)
     #If debug mode is disabled, recording is also disabled to save server resources.
     hudIDs = []
     effectIDs = []
     inWorldTextIDs = []
-    if debugMode == false:
+    if debugMode:
+        hudText(hostPlayer, getAverageServerLoad(), l"Server Load Average", null, HudPosition.RIGHT, 10, Color.WHITE, Color.WHITE, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    else:
         disableInspector()
 
 /*
@@ -53,11 +60,8 @@ rule "Initial Setup (Per Player Setup)":
     eventPlayer.disableGamemodeHud()
     eventPlayer.enableDeathSpectateTargetHud()
     eventPlayer.prevHero = null
-    if eventPlayer.getTeam() == Team.1:
-        eventPlayer.startForcingOutlineFor(getAllPlayers(), false, Color.WHITE)
-        eventPlayer.disableNameplatesFor(getAllPlayers())
-        eventPlayer.setRespawnTime(0.5)
-    else:
+    eventPlayer.setRespawnTime(5)
+    if eventPlayer.getTeam() == Team.2:
         eventPlayer.disableScoreboard()
         eventPlayer.disableKillFeed()
         eventPlayer.hasSpawned = false
@@ -79,6 +83,7 @@ rule "Pre-Match HUD & In-world Effect Creation":
     hudSubtext(getAllPlayers(), stringCode, HudPosition.RIGHT, -1, Color.AQUA, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudHeader([player for player in getPlayers(Team.2) if player.winstonGrab == true], "{0}: {1}".format(buttonString(Button.JUMP), stringWinstonRide), HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext(getPlayers(Team.2), stringTip, HudPosition.LEFT, 3, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubtext(getPlayers(Team.1), stringTip2, HudPosition.LEFT, 4, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext(getAllPlayers(), " \n{0}".format(stringGH), HudPosition.RIGHT, -0.92, Color.YELLOW, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext(getAllPlayers(), stringGHDiscord, HudPosition.RIGHT, -0.91, Color.YELLOW, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     #Late Join HUD Setup
@@ -90,13 +95,12 @@ rule "Pre-Match HUD & In-world Effect Creation":
    
     #Survivor Info HUD Setup
     hudSubtext([player for player in getPlayers(Team.2) if player.getCurrentHero() == Hero.MOIRA and player.hideInfo == false], " \n{0}\n\n{1}".format(stringMoiraTitle, "{0}\n{1}\n{2}".format("{0} {1}: {2}".format(abilityIconString(Hero.MOIRA, Button.ABILITY_1), buttonString(Button.ABILITY_1), stringMoiraAbility1), "{0} {1}: {2}".format(abilityIconString(Hero.ZENYATTA, Button.ABILITY_1), buttonString(Button.ABILITY_2), stringMoiraAbility2), stringMoiraPassive)), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-    hudSubtext([player for player in getPlayers(Team.2) if player.getCurrentHero() == Hero.HANZO and player.hideInfo == false], " \n{0}\n\n{1}".format(stringHanzoTitle, "{0}\n{1}\n{2}".format("{0} {1}: {2}".format(abilityIconString(Hero.HANZO, Button.ABILITY_1), buttonString(Button.ABILITY_1), stringHanzoAbility1), "{0} {1}: {2}".format(abilityIconString(Hero.HANZO, Button.JUMP), buttonString(Button.JUMP), stringHanzoAbility2), stringHanzoPassive)), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubtext([player for player in getPlayers(Team.2) if player.getCurrentHero() == Hero.HANZO and player.hideInfo == false], " \n{0}\n\n{1}".format(stringHanzoTitle, "{0}\n{1}\n{2}".format("{0} {1}: {2}".format(abilityIconString(Hero.WINSTON, Button.ABILITY_1), buttonString(Button.JUMP), stringHanzoAbility1), "{0} {1}: {2}".format(abilityIconString(Hero.HANZO, Button.JUMP), buttonString(Button.JUMP), stringHanzoAbility2), stringHanzoPassive)), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext([player for player in getPlayers(Team.2) if player.getCurrentHero() == Hero.BRIGITTE and player.hideInfo == false], " \n{0}\n\n{1}".format(stringBrigTitle, "{0}\n{1}".format("{0} {1}: {2}".format(abilityIconString(Hero.BRIGITTE, Button.ABILITY_1), buttonString(Button.ABILITY_1), stringBrigAbility1), "{0} {1}: {2}".format(abilityIconString(Hero.BRIGITTE, Button.SECONDARY_FIRE), buttonString(Button.SECONDARY_FIRE), stringBrigAbility2))), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext([player for player in getPlayers(Team.2) if player.getCurrentHero() == Hero.HAMMOND and player.hideInfo == false], " \n{0}\n\n{1}".format(stringWBTitle, "{0}\n{1}".format("{0} {1}: {2}".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_2), buttonString(Button.ABILITY_2), stringWBAbility1), "{0} {1}: {2}".format(abilityIconString(Hero.HAMMOND, Button.ULTIMATE), buttonString(Button.ULTIMATE), stringWBAbility2))), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext([player for player in getPlayers(Team.2) if player.getCurrentHero() == Hero.SYMMETRA and player.hideInfo == false], " \n{0}\n\n{1}".format(stringSymTitle, "{0}\n{1}".format("{0} {1}: {2}".format(abilityIconString(Hero.SYMMETRA, Button.ABILITY_1), buttonString(Button.ABILITY_1), stringSymAbility1), "{0} {1}: {2}".format(abilityIconString(Hero.SYMMETRA, Button.ABILITY_2), buttonString(Button.ABILITY_2), stringSymAbility2))), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext([player for player in getPlayers(Team.2) if player.getCurrentHero() == Hero.TRACER and player.hideInfo == false], " \n{0}\n\n{1}".format(stringTracerTitle, "{0}\n{1}\n{2}".format("{0} {1}: {2}".format(abilityIconString(Hero.TRACER, Button.ABILITY_1), buttonString(Button.ABILITY_1), stringTracerAbility1), "{0} {1}: {2}".format(abilityIconString(Hero.TRACER, Button.ABILITY_2), buttonString(Button.ABILITY_2), stringTracerAbility2), stringTracerPassive)), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext([player for player in getPlayers(Team.2) if player.getCurrentHero() == Hero.WINSTON and player.hideInfo == false], " \n{0}\n\n{1}".format(stringWinstonTitle, "{0}\n{1}".format("{0} {1}: {2}".format(abilityIconString(Hero.WINSTON, Button.ABILITY_1), buttonString(Button.ABILITY_1), stringWinstonAbility1), "{0} {1}: {2}".format(abilityIconString(Hero.MERCY, Button.ABILITY_2), buttonString(Button.SECONDARY_FIRE), stringWinstonAbility2))), HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-
 
 /*
     Subroutine creates name tags for Team 2.
@@ -126,8 +130,7 @@ def debugMode():
     
     #A dummy bot for Reaper and Ana is created so that you can test certain stuff. They both occupy slot 0 of each team, so if you don't want them to spawn in, make sure a player is in each of those slots.
     createDummy(Hero.REAPER, Team.1, 0, nearestWalkablePosition(vect(0, 0, 0)), vect(0, 0, 0))
-    hudText(hostPlayer, getAverageServerLoad(), l"Server Load Average", null, HudPosition.RIGHT, 10, Color.WHITE, Color.WHITE, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-    createDummy(Hero.ANA, Team.2, 0, nearestWalkablePosition(vect(1000, 0, 0)), vect(0, 0, 0))
+    createDummy(Hero.HANZO, Team.2, 0, nearestWalkablePosition(vect(1000, 0, 0)), vect(0, 0, 0))
     wait(2)
     damage(getLastCreatedEntity(), null, 150)
 
@@ -137,7 +140,14 @@ def debugMode():
 rule "Gamemode Setup":
     @Condition isGameInProgress() == true
     
-    setMatchTime(matchTimeMin * 60 + matchTimeSec)
+    if (constantMatchTime):
+        if (len(getPlayers(Team.2)) <= 2):
+            dynMatchTime = 70
+        else:
+            dynMatchTime = len(getPlayers(Team.2)) * 35
+    else:
+        dynMatchTime = matchTimeMin * 60 + matchTimeSec
+    setMatchTime(dynMatchTime)
     bigMessage(getPlayers(Team.2), stringObjectiveSurvivors)
     bigMessage(getPlayers(Team.1), stringObjectiveReaper)
     if debugMode == true:
@@ -164,7 +174,7 @@ rule "Winning Setup (Time Runs Out)":
 rule "Winning Setup (Reaper Kills Everyone that spawned on time)":
     @Condition isGameInProgress() == true
     @Condition len([player for player in getLivingPlayers(Team.2) if player.hasSpawned() == true]) == 0
-    @Condition getMatchTime() < matchTimeMin * 60 + matchTimeSec - gracePeriod
+    @Condition getMatchTime() < dynMatchTime - gracePeriod
     @Condition getPlayersInSlot(0, Team.1).hasSpawned() == true
     
     #If everyone is dead, Reaper wins.
@@ -178,7 +188,7 @@ rule "Winning Setup (Reaper Kills Everyone that spawned on time)":
 rule "Winning Setup (Survivors win if Reaper does not exist)":
     @Condition isGameInProgress() == true
     @Condition entityExists(getPlayersInSlot(0, Team.1)) == false
-    @Condition getMatchTime() < matchTimeMin * 60 + matchTimeSec - gracePeriod
+    @Condition getMatchTime() < dynMatchTime - gracePeriod
     
     #Backup win condition if Reaper did not spawn in or he disconnected.
     wait(0.1)
@@ -195,7 +205,7 @@ rule "Late Join Setup":
     @Condition eventPlayer.hasSpawned() == false
     @Condition isGameInProgress() == true
     #If a player joins or did not select a character before the grace period (default match time - grace period), then he is considered a late joining player. The game does not consider him to be alive, and when he spawns he is killed immediately.
-    @Condition getMatchTime() < matchTimeMin * 60 + matchTimeSec - gracePeriod
+    @Condition getMatchTime() < dynMatchTime - gracePeriod
     
     wait(0.1, Wait.ABORT_WHEN_FALSE)
     eventPlayer.lateJoin = true
