@@ -4,8 +4,6 @@
 
 globalvar stringVersion 
 globalvar stringCreator 
-globalvar stringDiscord 
-globalvar stringDiscordLink 
 globalvar stringProject 
 globalvar stringProjectLink 
 globalvar stringCreatorVersion
@@ -79,16 +77,14 @@ subroutine english
 rule "Constant Strings":
     stringCodeLink = "8MM16"
     stringProjectLink = "workshop.codes/8MM16"
-    stringDiscordLink = "discord.gg/CSKSVDH"
-    stringVersion = "1.2.0"
+    stringVersion = "1.2.1"
     stringCreator = "Block#12425"
-    stringGHDiscordLink = "grandeurhammers.com"
+    stringGHDiscordLink = "grandeurhammers.com/discord"
 
 rule "Determine Language (English)":
     #By default all strings are set to English. If it is a different language then the strings will be set to that, with any untranslated strings remaining in English.
     #All strings (that will be translated if they are) for the game.
-    stringProject =  "Project: {0}".format(stringProjectLink)
-    stringDiscord = "Discord: {0} (All caps)".format(stringDiscordLink)
+    stringProject =  "Link: {0}".format(stringProjectLink)
     stringCreatorVersion = "Created by: {0}. Version: {1}".format(stringCreator, stringVersion)
     stringCode = "Code: {0}".format(stringCodeLink)
     stringSec = "CD"

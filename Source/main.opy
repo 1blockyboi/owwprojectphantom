@@ -78,7 +78,6 @@ rule "Pre-Match HUD & In-world Effect Creation":
     hudSubtext([player for player in getPlayers(Team.1) if isGameInProgress() == true], stringObjectiveReaper, HudPosition.TOP, -1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudHeader(getAllPlayers(), "Project: Phantom", HudPosition.RIGHT, -5, Color.PURPLE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudText(getAllPlayers(), null, stringCreatorVersion, " ", HudPosition.RIGHT, -4, Color.WHITE, Color.WHITE, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-    hudSubtext(getAllPlayers(), stringDiscord, HudPosition.RIGHT, -3, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext(getAllPlayers(), stringProject, HudPosition.RIGHT, -2, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubtext(getAllPlayers(), stringCode, HudPosition.RIGHT, -1, Color.AQUA, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudHeader([player for player in getPlayers(Team.2) if player.winstonGrab == true], "{0}: {1}".format(buttonString(Button.JUMP), stringWinstonRide), HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)

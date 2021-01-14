@@ -4,7 +4,7 @@
 
 settings {
     "main": {
-        "description": "Project: Phantom. Survive the nightmare until time runs out! Choose from multiple and unique survivors to help both yourself and your teammates. Version 1.2.0. Created by Block#12425. Discord server: https://discord.gg/CSKSVDH"
+        "description": "Project: Phantom. Survive the nightmare until time runs out! Choose from multiple and unique survivors to help both yourself and your teammates. Version 1.2.1. Created by Block#12425. Code: 8MM16"
     },
     "lobby": {
         "allowPlayersInQueue": true,
